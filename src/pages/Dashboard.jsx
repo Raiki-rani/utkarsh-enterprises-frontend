@@ -34,28 +34,27 @@ function Dashboard() {
             setCustomerCount(customers.data.length);
             setBookingCount(bookings.data.length);
 
-            setRecentBookings(
-                bookings.data.slice(-5).reverse()
-            );
+            setRecentBookings(bookings.data.slice(-5).reverse());
 
-            const list = bookings.data;
+            const bookingList = bookings.data;
 
             setBooked(
-                list.filter((item) => item.status === "Booked").length
+                bookingList.filter((item) => item.status === "Booked").length
             );
 
             setInTransit(
-                list.filter((item) => item.status === "In Transit").length
+                bookingList.filter((item) => item.status === "In Transit").length
             );
 
             setOutForDelivery(
-                list.filter((item) => item.status === "Out for Delivery").length
+                bookingList.filter(
+                    (item) => item.status === "Out for Delivery"
+                ).length
             );
 
             setDelivered(
-                list.filter((item) => item.status === "Delivered").length
+                bookingList.filter((item) => item.status === "Delivered").length
             );
-
         } catch (error) {
             console.log(error);
         }
@@ -63,7 +62,6 @@ function Dashboard() {
 
     return (
         <DashboardLayout>
-
             <div
                 style={{
                     background:
@@ -73,6 +71,7 @@ function Dashboard() {
                     padding: "35px",
                     marginBottom: "35px",
                     boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+                    textAlign: "center",
                 }}
             >
                 <h1
@@ -95,8 +94,9 @@ function Dashboard() {
 
                 <p
                     style={{
-                        opacity: 0.9,
-                        marginTop: "10px",
+                        marginTop: "20px",
+                        fontSize: "20px",
+                        opacity: "0.9",
                     }}
                 >
                     Welcome back! Here's today's business overview.
@@ -115,19 +115,19 @@ function Dashboard() {
                 <StatCard
                     title="Products"
                     count={productCount}
-                    color="linear-gradient(135deg,#2563eb,#60a5fa)"
+                    color="#2563eb"
                 />
 
                 <StatCard
                     title="Customers"
                     count={customerCount}
-                    color="linear-gradient(135deg,#16a34a,#4ade80)"
+                    color="#16a34a"
                 />
 
                 <StatCard
                     title="Bookings"
                     count={bookingCount}
-                    color="linear-gradient(135deg,#ea580c,#fb923c)"
+                    color="#ea580c"
                 />
             </div>
 
@@ -137,34 +137,21 @@ function Dashboard() {
                 bookings={bookingCount}
             />
 
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns:
-                        "1fr 1fr",
-                    gap: "25px",
-                    marginTop: "40px",
-                }}
-            >
-                <BookingStatusCard
-                    booked={booked}
-                    inTransit={inTransit}
-                    outForDelivery={outForDelivery}
-                    delivered={delivered}
-                />
-
-                <BookingStatusChart
-                    booked={booked}
-                    inTransit={inTransit}
-                    outForDelivery={outForDelivery}
-                    delivered={delivered}
-                />
-            </div>
-
-            <RecentBookings
-                bookings={recentBookings}
+            <BookingStatusCard
+                booked={booked}
+                inTransit={inTransit}
+                outForDelivery={outForDelivery}
+                delivered={delivered}
             />
 
+            <BookingStatusChart
+                booked={booked}
+                inTransit={inTransit}
+                outForDelivery={outForDelivery}
+                delivered={delivered}
+            />
+
+            <RecentBookings bookings={recentBookings} />
         </DashboardLayout>
     );
 }
