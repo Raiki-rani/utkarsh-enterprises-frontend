@@ -2,31 +2,74 @@ function StatCard({ title, count, color }) {
     return (
         <div
             style={{
-                backgroundColor: color,
+                width: "280px",
+                minHeight: "170px",
+                background: `linear-gradient(135deg, ${color}, #0f172a)`,
                 color: "white",
-                width: "260px",
-                padding: "30px",
-                borderRadius: "12px",
-                textAlign: "center",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+                borderRadius: "20px",
+                padding: "25px",
+                boxShadow: "0 12px 30px rgba(0,0,0,0.25)",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                position: "relative",
+                overflow: "hidden",
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-8px)";
+                e.currentTarget.style.boxShadow =
+                    "0 20px 40px rgba(0,0,0,0.35)";
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0px)";
+                e.currentTarget.style.boxShadow =
+                    "0 12px 30px rgba(0,0,0,0.25)";
             }}
         >
-            <h1
+            {/* Decorative Circle */}
+            <div
                 style={{
-                    margin: 0,
-                    fontSize: "42px",
+                    position: "absolute",
+                    top: "-45px",
+                    right: "-45px",
+                    width: "120px",
+                    height: "120px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.15)",
                 }}
-            >
-                {count}
-            </h1>
+            />
 
-            <h3
+            <div
                 style={{
-                    marginTop: "15px",
+                    fontSize: "18px",
+                    fontWeight: "600",
+                    letterSpacing: "1px",
                 }}
             >
                 {title}
-            </h3>
+            </div>
+
+            <div
+                style={{
+                    fontSize: "58px",
+                    fontWeight: "bold",
+                    marginTop: "15px",
+                }}
+            >
+                {count}
+            </div>
+
+            <div
+                style={{
+                    marginTop: "10px",
+                    fontSize: "15px",
+                    opacity: "0.9",
+                }}
+            >
+                Updated Live
+            </div>
         </div>
     );
 }

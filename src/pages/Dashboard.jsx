@@ -9,7 +9,6 @@ import BookingStatusChart from "../components/BookingStatusChart";
 import RecentBookings from "../components/RecentBookings";
 
 function Dashboard() {
-
     const [productCount, setProductCount] = useState(0);
     const [customerCount, setCustomerCount] = useState(0);
     const [bookingCount, setBookingCount] = useState(0);
@@ -26,9 +25,7 @@ function Dashboard() {
     }, []);
 
     const loadDashboard = async () => {
-
         try {
-
             const products = await api.get("/products/all");
             const customers = await api.get("/customers/all");
             const bookings = await api.get("/bookings/all");
@@ -41,22 +38,22 @@ function Dashboard() {
                 bookings.data.slice(-5).reverse()
             );
 
-            const bookingList = bookings.data;
+            const list = bookings.data;
 
             setBooked(
-                bookingList.filter(item => item.status === "Booked").length
+                list.filter((item) => item.status === "Booked").length
             );
 
             setInTransit(
-                bookingList.filter(item => item.status === "In Transit").length
+                list.filter((item) => item.status === "In Transit").length
             );
 
             setOutForDelivery(
-                bookingList.filter(item => item.status === "Out for Delivery").length
+                list.filter((item) => item.status === "Out for Delivery").length
             );
 
             setDelivered(
-                bookingList.filter(item => item.status === "Delivered").length
+                list.filter((item) => item.status === "Delivered").length
             );
 
         } catch (error) {
@@ -67,43 +64,71 @@ function Dashboard() {
     return (
         <DashboardLayout>
 
-            <h1
+            <div
                 style={{
-                    textAlign: "center",
+                    background:
+                        "linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb)",
+                    color: "white",
+                    borderRadius: "20px",
+                    padding: "35px",
                     marginBottom: "35px",
-                    color: "#1e293b",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
                 }}
             >
-                📊 Utkarsh Enterprises Dashboard
-            </h1>
+                <h1
+                    style={{
+                        margin: 0,
+                        fontSize: "38px",
+                    }}
+                >
+                    🚚 Utkarsh Enterprises
+                </h1>
+
+                <h2
+                    style={{
+                        marginTop: "10px",
+                        fontWeight: "normal",
+                    }}
+                >
+                    Courier Management Dashboard
+                </h2>
+
+                <p
+                    style={{
+                        opacity: 0.9,
+                        marginTop: "10px",
+                    }}
+                >
+                    Welcome back! Here's today's business overview.
+                </p>
+            </div>
 
             <div
                 style={{
-                    display: "flex",
-                    justifyContent: "center",
+                    display: "grid",
+                    gridTemplateColumns:
+                        "repeat(auto-fit,minmax(250px,1fr))",
                     gap: "25px",
-                    flexWrap: "wrap",
+                    marginBottom: "40px",
                 }}
             >
-
                 <StatCard
                     title="Products"
                     count={productCount}
-                    color="#2563eb"
+                    color="linear-gradient(135deg,#2563eb,#60a5fa)"
                 />
 
                 <StatCard
                     title="Customers"
                     count={customerCount}
-                    color="#16a34a"
+                    color="linear-gradient(135deg,#16a34a,#4ade80)"
                 />
 
                 <StatCard
                     title="Bookings"
                     count={bookingCount}
-                    color="#ea580c"
+                    color="linear-gradient(135deg,#ea580c,#fb923c)"
                 />
-
             </div>
 
             <DashboardChart
@@ -112,21 +137,33 @@ function Dashboard() {
                 bookings={bookingCount}
             />
 
-            <BookingStatusCard
-                booked={booked}
-                inTransit={inTransit}
-                outForDelivery={outForDelivery}
-                delivered={delivered}
-            />
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                        "1fr 1fr",
+                    gap: "25px",
+                    marginTop: "40px",
+                }}
+            >
+                <BookingStatusCard
+                    booked={booked}
+                    inTransit={inTransit}
+                    outForDelivery={outForDelivery}
+                    delivered={delivered}
+                />
 
-            <BookingStatusChart
-                booked={booked}
-                inTransit={inTransit}
-                outForDelivery={outForDelivery}
-                delivered={delivered}
-            />
+                <BookingStatusChart
+                    booked={booked}
+                    inTransit={inTransit}
+                    outForDelivery={outForDelivery}
+                    delivered={delivered}
+                />
+            </div>
 
-            <RecentBookings bookings={recentBookings} />
+            <RecentBookings
+                bookings={recentBookings}
+            />
 
         </DashboardLayout>
     );

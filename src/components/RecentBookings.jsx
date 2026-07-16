@@ -1,104 +1,181 @@
 function RecentBookings({ bookings }) {
 
-    const getStatusColor = (status) => {
+    const getStatusStyle = (status) => {
+
         switch (status) {
-            case "Delivered":
-                return "green";
-            case "In Transit":
-                return "orange";
+
             case "Booked":
-                return "blue";
-            case "Pending":
-                return "red";
+                return {
+                    background: "#2563eb",
+                    color: "white",
+                };
+
+            case "In Transit":
+                return {
+                    background: "#f97316",
+                    color: "white",
+                };
+
+            case "Out for Delivery":
+                return {
+                    background: "#9333ea",
+                    color: "white",
+                };
+
+            case "Delivered":
+                return {
+                    background: "#16a34a",
+                    color: "white",
+                };
+
             default:
-                return "gray";
+                return {
+                    background: "#64748b",
+                    color: "white",
+                };
         }
     };
 
     return (
+
         <div
             style={{
-                marginTop: "50px",
-                width: "95%",
-                marginLeft: "auto",
-                marginRight: "auto",
+                width: "96%",
+                margin: "40px auto",
+                background: "#ffffff",
+                borderRadius: "20px",
+                padding: "25px",
+                boxShadow: "0 15px 35px rgba(0,0,0,0.12)",
             }}
         >
+
             <h2
                 style={{
                     textAlign: "center",
-                    marginBottom: "20px",
+                    color: "#0f172a",
+                    marginBottom: "25px",
+                    fontSize: "28px",
                 }}
             >
-                Recent Bookings
+                🚚 Recent Bookings
             </h2>
 
             <table
-                border="1"
-                cellPadding="12"
                 style={{
                     width: "100%",
                     borderCollapse: "collapse",
-                    backgroundColor: "white",
                 }}
             >
-                <thead
+
+                <thead>
+
+                <tr
                     style={{
-                        backgroundColor: "#1f2937",
+                        background: "#0f172a",
                         color: "white",
                     }}
                 >
-                <tr>
-                    <th>Tracking No.</th>
-                    <th>Sender</th>
-                    <th>Receiver</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Status</th>
+
+                    <th style={{ padding: "15px" }}>Tracking No.</th>
+                    <th style={{ padding: "15px" }}>Sender</th>
+                    <th style={{ padding: "15px" }}>Receiver</th>
+                    <th style={{ padding: "15px" }}>From</th>
+                    <th style={{ padding: "15px" }}>To</th>
+                    <th style={{ padding: "15px" }}>Status</th>
+
                 </tr>
+
                 </thead>
 
                 <tbody>
+
                 {bookings.length === 0 ? (
+
                     <tr>
+
                         <td
                             colSpan="6"
                             style={{
                                 textAlign: "center",
-                                padding: "20px",
+                                padding: "30px",
+                                color: "#64748b",
+                                fontWeight: "bold",
                             }}
                         >
-                            No Bookings Available
+                            No Recent Bookings
                         </td>
-                    </tr>
-                ) : (
-                    bookings.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.trackingNumber}</td>
-                            <td>{item.senderName}</td>
-                            <td>{item.receiverName}</td>
-                            <td>{item.fromCity}</td>
-                            <td>{item.toCity}</td>
 
-                            <td>
-                                    <span
-                                        style={{
-                                            backgroundColor: getStatusColor(item.status),
-                                            color: "white",
-                                            padding: "6px 12px",
-                                            borderRadius: "20px",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        {item.status}
-                                    </span>
+                    </tr>
+
+                ) : (
+
+                    bookings.map((item, index) => (
+
+                        <tr
+                            key={item.id}
+                            style={{
+                                background:
+                                    index % 2 === 0
+                                        ? "#f8fafc"
+                                        : "#ffffff",
+                                transition: "0.3s",
+                            }}
+                        >
+
+                            <td
+                                style={{
+                                    padding: "15px",
+                                    fontWeight: "bold",
+                                    color: "#2563eb",
+                                }}
+                            >
+                                {item.trackingNumber}
                             </td>
+
+                            <td style={{ padding: "15px" }}>
+                                {item.senderName}
+                            </td>
+
+                            <td style={{ padding: "15px" }}>
+                                {item.receiverName}
+                            </td>
+
+                            <td style={{ padding: "15px" }}>
+                                {item.fromCity}
+                            </td>
+
+                            <td style={{ padding: "15px" }}>
+                                {item.toCity}
+                            </td>
+
+                            <td style={{ padding: "15px" }}>
+
+                                <span
+                                    style={{
+                                        ...getStatusStyle(item.status),
+                                        padding: "8px 16px",
+                                        borderRadius: "20px",
+                                        fontWeight: "bold",
+                                        fontSize: "14px",
+                                    }}
+                                >
+                                    {item.status}
+                                </span>
+
+                            </td>
+
                         </tr>
+
                     ))
+
                 )}
+
                 </tbody>
+
             </table>
+
         </div>
+
     );
 }
 

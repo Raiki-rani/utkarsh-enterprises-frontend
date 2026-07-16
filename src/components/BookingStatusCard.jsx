@@ -1,3 +1,54 @@
+function StatusBox({ title, value, color, icon }) {
+    return (
+        <div
+            style={{
+                flex: "1",
+                minWidth: "220px",
+                background: `linear-gradient(135deg, ${color}, #0f172a)`,
+                color: "white",
+                padding: "25px",
+                borderRadius: "18px",
+                boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+                transition: "0.3s",
+                cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-8px)";
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0px)";
+            }}
+        >
+            <div
+                style={{
+                    fontSize: "42px",
+                    marginBottom: "15px",
+                }}
+            >
+                {icon}
+            </div>
+
+            <h3
+                style={{
+                    margin: 0,
+                    fontWeight: "500",
+                }}
+            >
+                {title}
+            </h3>
+
+            <h1
+                style={{
+                    marginTop: "15px",
+                    fontSize: "42px",
+                }}
+            >
+                {value}
+            </h1>
+        </div>
+    );
+}
+
 function BookingStatusCard({
                                booked,
                                inTransit,
@@ -7,93 +58,57 @@ function BookingStatusCard({
     return (
         <div
             style={{
-                width: "90%",
-                margin: "30px auto",
-                background: "white",
-                padding: "25px",
-                borderRadius: "12px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+                width: "95%",
+                margin: "35px auto",
             }}
         >
             <h2
                 style={{
                     textAlign: "center",
-                    marginBottom: "20px",
+                    color: "#0f172a",
+                    marginBottom: "25px",
+                    fontSize: "28px",
                 }}
             >
-                Booking Status Overview
+                📦 Booking Status Overview
             </h2>
 
-            <table
+            <div
                 style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
+                    display: "flex",
+                    gap: "20px",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
                 }}
             >
-                <tbody>
+                <StatusBox
+                    title="Booked"
+                    value={booked}
+                    color="#2563eb"
+                    icon="📋"
+                />
 
-                <tr>
-                    <td style={{ padding: "12px" }}>
-                        🔵 Booked
-                    </td>
-                    <td
-                        style={{
-                            padding: "12px",
-                            textAlign: "right",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {booked}
-                    </td>
-                </tr>
+                <StatusBox
+                    title="In Transit"
+                    value={inTransit}
+                    color="#f97316"
+                    icon="🚚"
+                />
 
-                <tr>
-                    <td style={{ padding: "12px" }}>
-                        🟠 In Transit
-                    </td>
-                    <td
-                        style={{
-                            padding: "12px",
-                            textAlign: "right",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {inTransit}
-                    </td>
-                </tr>
+                <StatusBox
+                    title="Out For Delivery"
+                    value={outForDelivery}
+                    color="#9333ea"
+                    icon="📦"
+                />
 
-                <tr>
-                    <td style={{ padding: "12px" }}>
-                        🟣 Out for Delivery
-                    </td>
-                    <td
-                        style={{
-                            padding: "12px",
-                            textAlign: "right",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {outForDelivery}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style={{ padding: "12px" }}>
-                        🟢 Delivered
-                    </td>
-                    <td
-                        style={{
-                            padding: "12px",
-                            textAlign: "right",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {delivered}
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
+                <StatusBox
+                    title="Delivered"
+                    value={delivered}
+                    color="#16a34a"
+                    icon="✅"
+                />
+            </div>
         </div>
     );
 }
