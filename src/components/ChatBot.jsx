@@ -6,8 +6,8 @@ function ChatBot() {
     const [messages, setMessages] = useState([
         {
             sender: "bot",
-            text: "👋 Welcome to Utkarsh Enterprises! How can I help you today?"
-        }
+            text: "👋 Welcome to Utkarsh Enterprises! How can I help you today?",
+        },
     ]);
 
     const [input, setInput] = useState("");
@@ -20,24 +20,72 @@ function ChatBot() {
             text: input,
         };
 
-        let reply = "Sorry, I didn't understand your question.";
-
         const text = input.toLowerCase();
 
-        if (text.includes("tracking") || text.includes("track")) {
-            reply = "📦 Please go to the Track Parcel page and enter your Tracking Number.";
+        let reply =
+            "❓ Sorry, I didn't understand that. Please ask about tracking, booking, products, customers, contact, office timings, delivery, or courier charges.";
+
+        if (
+            text.includes("hi") ||
+            text.includes("hello") ||
+            text.includes("hey")
+        ) {
+            reply =
+                "👋 Hello! Welcome to Utkarsh Enterprises. How can I help you today?";
+        } else if (text.includes("how are you")) {
+            reply =
+                "😊 I'm doing great! Thank you for asking. How can I help you today?";
+        } else if (
+            text.includes("tracking") ||
+            text.includes("track")
+        ) {
+            reply =
+                "📦 Please open the Track Parcel page and enter your Tracking Number.";
         } else if (text.includes("booking")) {
-            reply = "📋 You can create a booking from the Bookings section.";
+            reply =
+                "🚚 You can create a new booking from the Bookings section.";
         } else if (text.includes("product")) {
-            reply = "📦 Products can be viewed and managed from the Products page.";
+            reply =
+                "📦 You can view all courier services from the Products page.";
         } else if (text.includes("customer")) {
-            reply = "👤 Customers can be added from the Customers section.";
-        } else if (text.includes("contact")) {
-            reply = "📞 Call us at +91 9386064051.";
-        } else if (text.includes("branch")) {
+            reply =
+                "👤 Customer information can be managed from the Customers section.";
+        } else if (
+            text.includes("contact") ||
+            text.includes("phone") ||
+            text.includes("mobile")
+        ) {
+            reply = "📞 Contact us at +91 9386064051.";
+        } else if (
+            text.includes("address") ||
+            text.includes("location") ||
+            text.includes("branch") ||
+            text.includes("office")
+        ) {
             reply = "📍 Our office is located in Ranchi, Jharkhand.";
-        } else if (text.includes("hello") || text.includes("hi")) {
-            reply = "😊 Hello! Welcome to Utkarsh Enterprises.";
+        } else if (
+            text.includes("time") ||
+            text.includes("timing") ||
+            text.includes("hours")
+        ) {
+            reply =
+                "🕘 Our office is open Monday to Saturday, 9:00 AM to 7:00 PM.";
+        } else if (text.includes("delivery")) {
+            reply =
+                "🚚 Delivery usually takes 2–5 business days depending on the destination.";
+        } else if (
+            text.includes("price") ||
+            text.includes("charge") ||
+            text.includes("cost")
+        ) {
+            reply =
+                "💰 Courier charges depend on parcel weight and destination. Please contact our office for the exact quotation.";
+        } else if (
+            text.includes("thank") ||
+            text.includes("thanks")
+        ) {
+            reply =
+                "🙏 You're welcome! Thank you for choosing Utkarsh Enterprises.";
         }
 
         const botMessage = {
@@ -60,13 +108,13 @@ function ChatBot() {
                     width: "65px",
                     height: "65px",
                     borderRadius: "50%",
+                    border: "none",
                     backgroundColor: "#2563eb",
                     color: "white",
-                    border: "none",
                     fontSize: "28px",
                     cursor: "pointer",
-                    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-                    zIndex: 999999,
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                    zIndex: 9999,
                 }}
             >
                 💬
@@ -80,13 +128,13 @@ function ChatBot() {
                         right: "20px",
                         width: "340px",
                         height: "430px",
-                        backgroundColor: "#ffffff",
+                        background: "#fff",
                         borderRadius: "12px",
                         boxShadow: "0 0 20px rgba(0,0,0,0.3)",
                         display: "flex",
                         flexDirection: "column",
                         overflow: "hidden",
-                        zIndex: 999999,
+                        zIndex: 9999,
                     }}
                 >
                     <div
@@ -94,8 +142,8 @@ function ChatBot() {
                             backgroundColor: "#2563eb",
                             color: "white",
                             padding: "15px",
-                            fontWeight: "bold",
                             textAlign: "center",
+                            fontWeight: "bold",
                         }}
                     >
                         🤖 Utkarsh AI Assistant
@@ -104,23 +152,26 @@ function ChatBot() {
                     <div
                         style={{
                             flex: 1,
-                            padding: "10px",
                             overflowY: "auto",
-                            backgroundColor: "#f5f5f5",
+                            padding: "10px",
+                            background: "#f5f5f5",
                         }}
                     >
                         {messages.map((msg, index) => (
                             <div
                                 key={index}
                                 style={{
-                                    textAlign: msg.sender === "user" ? "right" : "left",
+                                    textAlign:
+                                        msg.sender === "user"
+                                            ? "right"
+                                            : "left",
                                     marginBottom: "10px",
                                 }}
                             >
                                 <span
                                     style={{
                                         display: "inline-block",
-                                        padding: "8px 12px",
+                                        padding: "10px",
                                         borderRadius: "10px",
                                         backgroundColor:
                                             msg.sender === "user"
@@ -148,7 +199,9 @@ function ChatBot() {
                         <input
                             type="text"
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}
+                            onChange={(e) =>
+                                setInput(e.target.value)
+                            }
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                     sendMessage();
@@ -158,8 +211,8 @@ function ChatBot() {
                             style={{
                                 flex: 1,
                                 padding: "10px",
-                                borderRadius: "5px",
                                 border: "1px solid #ccc",
+                                borderRadius: "5px",
                             }}
                         />
 
