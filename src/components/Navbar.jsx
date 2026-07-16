@@ -1,6 +1,4 @@
 import logo from "../assets/logo.png";
-
-
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -12,68 +10,129 @@ function Navbar() {
         navigate("/login");
     };
 
+    const linkStyle = {
+        color: "white",
+        textDecoration: "none",
+        fontSize: "16px",
+        fontWeight: "600",
+        transition: "0.3s",
+    };
+
     return (
         <nav
             style={{
-                background: "#1e293b",
-                padding: "15px 40px",
+                position: "sticky",
+                top: 0,
+                zIndex: 1000,
+                background: "linear-gradient(90deg,#0f172a,#1e3a8a)",
+                backdropFilter: "blur(12px)",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+                padding: "14px 40px",
+                boxShadow: "0 8px 25px rgba(0,0,0,0.25)",
             }}
         >
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <img
-                    src={logo}
-                    alt="Logo"
-                    style={{
-                        width: "45px",
-                        height: "45px",
-                        borderRadius: "8px"
-                    }}
-                />
 
-                <h2 style={{ color: "white", margin: 0 }}>
-                    Utkarsh Enterprises
-                </h2>
-            </div>
+            {/* Logo */}
 
             <div
                 style={{
                     display: "flex",
-                    gap: "20px",
                     alignItems: "center",
+                    gap: "15px",
                 }}
             >
-                <Link style={{ color: "white", textDecoration: "none" }} to="/">Home</Link>
-                <Link style={{ color: "white", textDecoration: "none" }} to="/about">About</Link>
+                <img
+                    src={logo}
+                    alt="Logo"
+                    style={{
+                        width: "55px",
+                        height: "55px",
+                        borderRadius: "12px",
+                        background: "white",
+                        padding: "5px",
+                    }}
+                />
 
-                <Link style={{ color: "white", textDecoration: "none" }} to="/dashboard">Dashboard</Link>
+                <div>
 
-                <Link style={{ color: "white", textDecoration: "none" }} to="/products">Products</Link>
+                    <h2
+                        style={{
+                            color: "white",
+                            margin: 0,
+                            fontSize: "28px",
+                        }}
+                    >
+                        Utkarsh Enterprises
+                    </h2>
 
-                <Link style={{ color: "white", textDecoration: "none" }} to="/customers">Customers</Link>
+                    <p
+                        style={{
+                            margin: 0,
+                            color: "#cbd5e1",
+                            fontSize: "13px",
+                        }}
+                    >
+                        Courier & Logistics Solutions
+                    </p>
 
-                <Link style={{ color: "white", textDecoration: "none" }} to="/bookings">Bookings</Link>
+                </div>
 
-                <Link style={{ color: "white", textDecoration: "none" }} to="/track">Track Parcel</Link>
-                <Link style={{ color: "white", textDecoration: "none" }} to="/contact">Contact</Link>
-                <Link style={{ color: "white", textDecoration: "none" }} to="/profile">Profile</Link>
+            </div>
+
+            {/* Navigation */}
+
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "24px",
+                }}
+            >
+
+                <Link style={linkStyle} to="/">Home</Link>
+
+                <Link style={linkStyle} to="/about">About</Link>
+
+                <Link style={linkStyle} to="/dashboard">Dashboard</Link>
+
+                <Link style={linkStyle} to="/products">Products</Link>
+
+                <Link style={linkStyle} to="/customers">Customers</Link>
+
+                <Link style={linkStyle} to="/bookings">Bookings</Link>
+
+                <Link style={linkStyle} to="/track">
+                    Track Parcel
+                </Link>
+
+                <Link style={linkStyle} to="/contact">
+                    Contact
+                </Link>
+
+                <Link style={linkStyle} to="/profile">
+                    Profile
+                </Link>
 
                 <button
                     onClick={logout}
                     style={{
-                        background: "crimson",
+                        background: "linear-gradient(135deg,#ef4444,#dc2626)",
                         color: "white",
                         border: "none",
-                        padding: "8px 15px",
+                        padding: "10px 22px",
+                        borderRadius: "10px",
                         cursor: "pointer",
-                        borderRadius: "5px",
+                        fontWeight: "bold",
+                        boxShadow: "0 5px 15px rgba(239,68,68,.4)",
                     }}
                 >
                     Logout
                 </button>
+
             </div>
+
         </nav>
     );
 }
