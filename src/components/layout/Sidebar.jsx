@@ -1,110 +1,102 @@
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
+    const location = useLocation();
 
-    const navigate = useNavigate();
-
-    const logout = () => {
-        localStorage.removeItem("isLoggedIn");
-        navigate("/login");
-    };
+    const menu = [
+        { name: "Dashboard", path: "/dashboard", icon: "📊" },
+        { name: "Products", path: "/products", icon: "📦" },
+        { name: "Customers", path: "/customers", icon: "👥" },
+        { name: "Bookings", path: "/bookings", icon: "🚚" },
+        { name: "Track Parcel", path: "/track", icon: "📍" },
+        { name: "Profile", path: "/profile", icon: "👤" },
+    ];
 
     return (
         <div
             style={{
                 width: "250px",
-                minHeight: "100vh",
-                background: "#0f172a",
-                color: "white",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
+                height: "100vh",
                 position: "fixed",
                 left: 0,
                 top: 0,
+                background: "linear-gradient(180deg,#0f172a,#1e3a8a)",
+                color: "white",
+                padding: "25px 20px",
+                boxSizing: "border-box",
+                boxShadow: "5px 0 20px rgba(0,0,0,0.2)",
             }}
         >
-            <div>
-
-                <div
+            <div
+                style={{
+                    textAlign: "center",
+                    marginBottom: "35px",
+                }}
+            >
+                <img
+                    src="/logo.png"
+                    alt="Logo"
                     style={{
-                        textAlign: "center",
-                        padding: "25px",
-                        borderBottom: "1px solid #334155",
+                        width: "70px",
+                        borderRadius: "50%",
+                        marginBottom: "10px",
+                    }}
+                />
+
+                <h2 style={{ margin: 0 }}>
+                    Utkarsh Enterprises
+                </h2>
+
+                <p style={{ color: "#cbd5e1" }}>
+                    Admin Panel
+                </p>
+            </div>
+
+            {menu.map((item) => (
+                <Link
+                    key={item.path}
+                    to={item.path}
+                    style={{
+                        textDecoration: "none",
                     }}
                 >
-                    <img
-                        src={logo}
-                        alt="Logo"
+                    <div
                         style={{
-                            width: "80px",
-                            height: "80px",
-                            borderRadius: "50%",
-                            marginBottom: "10px",
+                            padding: "14px",
+                            marginBottom: "12px",
+                            borderRadius: "12px",
+                            background:
+                                location.pathname === item.path
+                                    ? "#2563eb"
+                                    : "transparent",
+                            color: "white",
+                            transition: "0.3s",
+                            cursor: "pointer",
+                            fontWeight: "bold",
                         }}
-                    />
+                    >
+                        {item.icon} {item.name}
+                    </div>
+                </Link>
+            ))}
 
-                    <h2 style={{ margin: 0 }}>
-                        Utkarsh Enterprises
-                    </h2>
-
-                    <p style={{ color: "#cbd5e1" }}>
-                        Admin Panel
-                    </p>
-                </div>
-
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        padding: "20px",
-                        gap: "12px",
-                    }}
-                >
-                    <Link style={linkStyle} to="/dashboard">📊 Dashboard</Link>
-
-                    <Link style={linkStyle} to="/products">📦 Products</Link>
-
-                    <Link style={linkStyle} to="/customers">👥 Customers</Link>
-
-                    <Link style={linkStyle} to="/bookings">📋 Bookings</Link>
-
-                    <Link style={linkStyle} to="/track">🚚 Track Parcel</Link>
-
-                    <Link style={linkStyle} to="/profile">👤 Profile</Link>
-                </div>
-
-            </div>
-
-            <div style={{ padding: "20px" }}>
-                <button
-                    onClick={logout}
-                    style={{
-                        width: "100%",
-                        padding: "12px",
-                        background: "#dc2626",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        fontSize: "16px",
-                    }}
-                >
-                    Logout
-                </button>
-            </div>
-
+            <button
+                style={{
+                    width: "100%",
+                    marginTop: "30px",
+                    padding: "12px",
+                    background: "#ef4444",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                }}
+            >
+                Logout
+            </button>
         </div>
     );
 }
-
-const linkStyle = {
-    color: "white",
-    textDecoration: "none",
-    padding: "12px",
-    background: "#1e293b",
-    borderRadius: "8px",
-};
 
 export default Sidebar;

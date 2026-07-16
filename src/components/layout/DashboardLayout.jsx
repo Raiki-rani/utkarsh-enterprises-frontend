@@ -5,7 +5,7 @@ function DashboardLayout({ children }) {
         <div
             style={{
                 display: "flex",
-                background: "#f1f5f9",
+                background: "linear-gradient(135deg,#eef2ff,#f8fafc,#ffffff)",
                 minHeight: "100vh",
             }}
         >
