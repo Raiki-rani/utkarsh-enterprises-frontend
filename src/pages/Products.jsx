@@ -76,13 +76,14 @@ function Products() {
                 cellPadding="10"
                 style={{
                     margin: "auto",
-                    width: "90%",
+                    width: "98%",
                     borderCollapse: "collapse",
                 }}
             >
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Image</th>
                     <th>Product Name</th>
                     <th>Category</th>
                     <th>Price</th>
@@ -101,9 +102,27 @@ function Products() {
                     .map((item) => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
+
+                            <td>
+                                {item.imageUrl ? (
+                                    <img
+                                        src={item.imageUrl}
+                                        alt={item.productName}
+                                        style={{
+                                            width: "70px",
+                                            height: "70px",
+                                            objectFit: "cover",
+                                            borderRadius: "8px",
+                                        }}
+                                    />
+                                ) : (
+                                    "No Image"
+                                )}
+                            </td>
+
                             <td>{item.productName}</td>
                             <td>{item.category}</td>
-                            <td>{item.price}</td>
+                            <td>₹ {item.price}</td>
                             <td>{item.stock}</td>
 
                             <td>

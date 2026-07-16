@@ -11,11 +11,11 @@ function AddProduct() {
         price: "",
         stock: "",
         description: "",
+        imageUrl: "",
     });
 
     const saveProduct = () => {
-        api
-            .post("/products/add", product)
+        api.post("/products/add", product)
             .then(() => {
                 alert("Product Added Successfully!");
                 navigate("/products");
@@ -29,9 +29,13 @@ function AddProduct() {
     return (
         <div
             style={{
-                width: "400px",
+                width: "450px",
                 margin: "40px auto",
                 textAlign: "center",
+                background: "#ffffff",
+                padding: "25px",
+                borderRadius: "10px",
+                boxShadow: "0 0 10px rgba(0,0,0,0.15)",
             }}
         >
             <h1>Add Product</h1>
@@ -105,6 +109,20 @@ function AddProduct() {
                 }}
             />
 
+            <input
+                type="text"
+                placeholder="Image URL"
+                value={product.imageUrl}
+                onChange={(e) =>
+                    setProduct({ ...product, imageUrl: e.target.value })
+                }
+                style={{
+                    width: "100%",
+                    padding: "10px",
+                    marginBottom: "15px",
+                }}
+            />
+
             <button
                 onClick={saveProduct}
                 style={{
@@ -115,6 +133,7 @@ function AddProduct() {
                     border: "none",
                     borderRadius: "5px",
                     cursor: "pointer",
+                    fontSize: "16px",
                 }}
             >
                 Save Product
