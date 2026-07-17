@@ -178,7 +178,7 @@ function App() {
                             <Reports />
                         </ProtectedRoute>
                     }
-                />
+                    />
 
                 <Route
                     path="/track"

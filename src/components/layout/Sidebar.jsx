@@ -1,4 +1,4 @@
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Sidebar() {
