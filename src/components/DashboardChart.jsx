@@ -22,71 +22,66 @@ ChartJS.register(
 function DashboardChart({ products, customers, bookings }) {
 
     const data = {
-        labels: [
-            "Products",
-            "Customers",
-            "Bookings",
-        ],
+        labels: ["Products", "Customers", "Bookings"],
         datasets: [
             {
                 label: "Total Records",
-                data: [
-                    products,
-                    customers,
-                    bookings,
-                ],
+                data: [products, customers, bookings],
                 backgroundColor: [
                     "#2563eb",
-                    "#16a34a",
+                    "#22c55e",
                     "#f97316",
                 ],
-                borderRadius: 12,
+                borderRadius: 14,
                 borderSkipped: false,
+                maxBarThickness: 70,
             },
         ],
     };
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
 
         plugins: {
-
             legend: {
                 display: false,
             },
 
             title: {
                 display: true,
-                text: "📊 Business Analytics Overview",
+                text: "Business Analytics Overview",
                 color: "#0f172a",
                 font: {
                     size: 24,
                     weight: "bold",
                 },
+                padding: {
+                    bottom: 25,
+                },
             },
 
             tooltip: {
                 backgroundColor: "#0f172a",
-                titleColor: "#ffffff",
-                bodyColor: "#ffffff",
-                padding: 12,
+                titleColor: "#fff",
+                bodyColor: "#fff",
+                padding: 14,
+                cornerRadius: 8,
             },
-
         },
 
         scales: {
 
             x: {
+                grid: {
+                    display: false,
+                },
                 ticks: {
-                    color: "#334155",
+                    color: "#475569",
                     font: {
                         size: 15,
                         weight: "bold",
                     },
-                },
-
-                grid: {
-                    display: false,
                 },
             },
 
@@ -94,39 +89,68 @@ function DashboardChart({ products, customers, bookings }) {
                 beginAtZero: true,
 
                 ticks: {
-                    color: "#334155",
                     stepSize: 1,
+                    color: "#475569",
                 },
 
                 grid: {
-                    color: "#e2e8f0",
+                    color: "#e5e7eb",
                 },
             },
-
         },
 
+        animation: {
+            duration: 1500,
+        },
     };
 
     return (
 
         <div
             style={{
-                width: "92%",
-                margin: "35px auto",
                 background: "#ffffff",
                 borderRadius: "20px",
                 padding: "30px",
-                boxShadow: "0 15px 35px rgba(0,0,0,0.12)",
+                boxShadow: "0 12px 30px rgba(0,0,0,.08)",
             }}
         >
 
-            <Bar
-                data={data}
-                options={options}
-            />
+            <div
+                style={{
+                    marginBottom: "20px",
+                }}
+            >
+                <h2
+                    style={{
+                        margin: 0,
+                        color: "#0f172a",
+                    }}
+                >
+                    📊 Analytics Dashboard
+                </h2>
+
+                <p
+                    style={{
+                        color: "#64748b",
+                        marginTop: "8px",
+                    }}
+                >
+                    Overview of products, customers and bookings.
+                </p>
+            </div>
+
+            <div
+                style={{
+                    height: "420px",
+                }}
+            >
+                <Bar
+                    data={data}
+                    options={options}
+                />
+            </div>
 
         </div>
-
     );
 }
 

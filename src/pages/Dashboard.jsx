@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 import DashboardLayout from "../components/layout/DashboardLayout";
@@ -9,6 +10,8 @@ import BookingStatusChart from "../components/BookingStatusChart";
 import RecentBookings from "../components/RecentBookings";
 
 function Dashboard() {
+    const navigate = useNavigate();
+
     const [productCount, setProductCount] = useState(0);
     const [customerCount, setCustomerCount] = useState(0);
     const [bookingCount, setBookingCount] = useState(0);
@@ -53,8 +56,11 @@ function Dashboard() {
             );
 
             setDelivered(
-                bookingList.filter((item) => item.status === "Delivered").length
+                bookingList.filter(
+                    (item) => item.status === "Delivered"
+                ).length
             );
+
         } catch (error) {
             console.log(error);
         }
@@ -62,31 +68,29 @@ function Dashboard() {
 
     return (
         <DashboardLayout>
+
+            {/* Hero Section */}
+
             <div
                 style={{
                     background:
                         "linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb)",
                     color: "white",
                     borderRadius: "20px",
-                    padding: "35px",
+                    padding: "40px",
                     marginBottom: "35px",
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+                    boxShadow: "0 12px 30px rgba(0,0,0,.25)",
                     textAlign: "center",
                 }}
             >
-                <h1
-                    style={{
-                        margin: 0,
-                        fontSize: "38px",
-                    }}
-                >
+                <h1 style={{ margin: 0, fontSize: "40px" }}>
                     🚚 Utkarsh Enterprises
-                </h1>s
+                </h1>
 
                 <h2
                     style={{
-                        marginTop: "10px",
-                        fontWeight: "normal",
+                        marginTop: "12px",
+                        fontWeight: "500",
                     }}
                 >
                     Courier Management Dashboard
@@ -94,14 +98,17 @@ function Dashboard() {
 
                 <p
                     style={{
-                        marginTop: "20px",
-                        fontSize: "20px",
+                        marginTop: "18px",
+                        fontSize: "19px",
                         opacity: "0.9",
                     }}
                 >
                     Welcome back! Here's today's business overview.
                 </p>
+
             </div>
+
+            {/* Statistics */}
 
             <div
                 style={{
@@ -109,7 +116,7 @@ function Dashboard() {
                     gridTemplateColumns:
                         "repeat(auto-fit,minmax(250px,1fr))",
                     gap: "25px",
-                    marginBottom: "40px",
+                    marginBottom: "35px",
                 }}
             >
                 <StatCard
@@ -129,31 +136,108 @@ function Dashboard() {
                     count={bookingCount}
                     color="#ea580c"
                 />
+
+                <StatCard
+                    title="Delivered"
+                    count={delivered}
+                    color="#7c3aed"
+                />
+
             </div>
 
-            <DashboardChart
-                products={productCount}
-                customers={customerCount}
-                bookings={bookingCount}
-            />
+            {/* Quick Actions */}
 
-            <BookingStatusCard
-                booked={booked}
-                inTransit={inTransit}
-                outForDelivery={outForDelivery}
-                delivered={delivered}
-            />
+            <div
+                style={{
+                    display: "flex",
+                    gap: "20px",
+                    marginBottom: "35px",
+                    flexWrap: "wrap",
+                }}
+            >
+                <button
+                    onClick={() => navigate("/bookings")}
+                    style={buttonStyle}
+                >
+                    ➕ Add Booking
+                </button>
 
-            <BookingStatusChart
-                booked={booked}
-                inTransit={inTransit}
-                outForDelivery={outForDelivery}
-                delivered={delivered}
-            />
+                <button
+                    onClick={() => navigate("/customers")}
+                    style={buttonStyle}
+                >
+                    👤 Add Customer
+                </button>
 
-            <RecentBookings bookings={recentBookings} />
+                <button
+                    onClick={() => navigate("/products")}
+                    style={buttonStyle}
+                >
+                    📦 Add Product
+                </button>
+
+            </div>
+
+            {/* Dashboard Chart */}
+
+            <div style={cardStyle}>
+                <DashboardChart
+                    products={productCount}
+                    customers={customerCount}
+                    bookings={bookingCount}
+                />
+            </div>
+
+            {/* Booking Status */}
+
+            <div style={cardStyle}>
+                <BookingStatusCard
+                    booked={booked}
+                    inTransit={inTransit}
+                    outForDelivery={outForDelivery}
+                    delivered={delivered}
+                />
+            </div>
+
+            {/* Status Chart */}
+
+            <div style={cardStyle}>
+                <BookingStatusChart
+                    booked={booked}
+                    inTransit={inTransit}
+                    outForDelivery={outForDelivery}
+                    delivered={delivered}
+                />
+            </div>
+
+            {/* Recent Bookings */}
+
+            <div style={cardStyle}>
+                <RecentBookings bookings={recentBookings} />
+            </div>
+
         </DashboardLayout>
     );
 }
+
+const cardStyle = {
+    background: "white",
+    borderRadius: "18px",
+    padding: "25px",
+    marginBottom: "30px",
+    boxShadow: "0 8px 20px rgba(0,0,0,.08)",
+};
+
+const buttonStyle = {
+    padding: "14px 28px",
+    background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
+    color: "white",
+    border: "none",
+    borderRadius: "12px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    boxShadow: "0 8px 18px rgba(37,99,235,.3)",
+};
 
 export default Dashboard;
