@@ -24,60 +24,83 @@ function Navbar() {
                 position: "sticky",
                 top: 0,
                 zIndex: 1000,
-                background: "linear-gradient(90deg,#0f172a,#1e3a8a)",
-                backdropFilter: "blur(12px)",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "14px 40px",
-                boxShadow: "0 8px 25px rgba(0,0,0,0.25)",
+                background: "linear-gradient(90deg,#020617,#1e3a8a)",
+                boxShadow: "0 8px 25px rgba(0,0,0,.25)",
+                padding: "15px 40px",
             }}
         >
 
-            {/* Logo */}
+            {/* Top Section */}
 
             <div
                 style={{
                     display: "flex",
+                    justifyContent: "space-between",
                     alignItems: "center",
-                    gap: "15px",
                 }}
             >
-                <img
-                    src={logo}
-                    alt="Logo"
+
+                <div
                     style={{
-                        width: "55px",
-                        height: "55px",
-                        borderRadius: "12px",
-                        background: "white",
-                        padding: "5px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "18px",
                     }}
-                />
+                >
 
-                <div>
-
-                    <h2
+                    <img
+                        src={logo}
+                        alt="Logo"
                         style={{
-                            color: "white",
-                            margin: 0,
-                            fontSize: "28px",
+                            width: "65px",
+                            height: "65px",
+                            borderRadius: "12px",
+                            background: "white",
+                            padding: "5px",
                         }}
-                    >
-                        Utkarsh Enterprises
-                    </h2>
+                    />
 
-                    <p
-                        style={{
-                            margin: 0,
-                            color: "#cbd5e1",
-                            fontSize: "13px",
-                        }}
-                    >
-                        Total Courier & Logistics Solutions
-                    </p>
+                    <div>
+
+                        <h2
+                            style={{
+                                margin: 0,
+                                color: "white",
+                                fontSize: "30px",
+                            }}
+                        >
+                            Utkarsh Enterprises
+                        </h2>
+
+                        <p
+                            style={{
+                                margin: 0,
+                                color: "#cbd5e1",
+                                fontSize: "14px",
+                            }}
+                        >
+                            Total Courier & Logistics Solutions
+                        </p>
+
+                    </div>
 
                 </div>
+
+                <button
+                    onClick={logout}
+                    style={{
+                        background: "linear-gradient(135deg,#ef4444,#dc2626)",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 24px",
+                        borderRadius: "10px",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        fontSize: "15px",
+                    }}
+                >
+                    Logout
+                </button>
 
             </div>
 
@@ -86,22 +109,41 @@ function Navbar() {
             <div
                 style={{
                     display: "flex",
+                    justifyContent: "center",
                     alignItems: "center",
-                    gap: "24px",
+                    gap: "35px",
+                    marginTop: "18px",
+                    flexWrap: "wrap",
                 }}
             >
 
-                <Link style={linkStyle} to="/">Home</Link>
+                <Link style={linkStyle} to="/">
+                    Home
+                </Link>
 
-                <Link style={linkStyle} to="/about">About</Link>
+                <Link style={linkStyle} to="/about">
+                    About
+                </Link>
 
-                <Link style={linkStyle} to="/dashboard">Dashboard</Link>
+                <Link style={linkStyle} to="/dashboard">
+                    Dashboard
+                </Link>
 
-                <Link style={linkStyle} to="/products">Products</Link>
+                <Link style={linkStyle} to="/products">
+                    Products
+                </Link>
 
-                <Link style={linkStyle} to="/customers">Customers</Link>
+                <Link style={linkStyle} to="/customers">
+                    Customers
+                </Link>
 
-                <Link style={linkStyle} to="/bookings">Bookings</Link>
+                <Link style={linkStyle} to="/bookings">
+                    Bookings
+                </Link>
+
+                <Link style={linkStyle} to="/reports">
+                    Reports
+                </Link>
 
                 <Link style={linkStyle} to="/track">
                     Track Consignment
@@ -114,22 +156,6 @@ function Navbar() {
                 <Link style={linkStyle} to="/profile">
                     Profile
                 </Link>
-
-                <button
-                    onClick={logout}
-                    style={{
-                        background: "linear-gradient(135deg,#ef4444,#dc2626)",
-                        color: "white",
-                        border: "none",
-                        padding: "10px 22px",
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                        boxShadow: "0 5px 15px rgba(239,68,68,.4)",
-                    }}
-                >
-                    Logout
-                </button>
 
             </div>
 
