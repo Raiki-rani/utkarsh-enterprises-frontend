@@ -12,12 +12,13 @@ function Sidebar() {
     };
 
     const menu = [
-        { name: "Dashboard", path: "/dashboard", icon: "📊" },
-        { name: "Products", path: "/products", icon: "📦" },
-        { name: "Customers", path: "/customers", icon: "👥" },
-        { name: "Bookings", path: "/bookings", icon: "🚚" },
-        { name: "Track Parcel", path: "/track", icon: "📍" },
-        { name: "Profile", path: "/profile", icon: "👤" },
+    { name: "Dashboard", path: "/dashboard", icon: "📊" },
+    { name: "Products", path: "/products", icon: "📦" },
+    { name: "Customers", path: "/customers", icon: "👥" },
+    { name: "Bookings", path: "/bookings", icon: "🚚" },
+    { name: "Reports", path: "/reports", icon: "📈" },
+    { name: "Track Parcel", path: "/track", icon: "📍" },
+    { name: "Profile", path: "/profile", icon: "👤" },
     ];
 
     return (
