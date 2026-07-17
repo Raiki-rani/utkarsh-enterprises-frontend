@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Reports from "./pages/Reports";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -167,6 +168,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <EditBooking />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/reports"
+                    element={
+                        <ProtectedRoute>
+                            <Reports />
                         </ProtectedRoute>
                     }
                 />
