@@ -74,7 +74,7 @@ function Navbar() {
                             fontSize: "13px",
                         }}
                     >
-                        Courier & Logistics Solutions
+                        Total Courier & Logistics Solutions
                     </p>
 
                 </div>
@@ -104,7 +104,7 @@ function Navbar() {
                 <Link style={linkStyle} to="/bookings">Bookings</Link>
 
                 <Link style={linkStyle} to="/track">
-                    Track Parcel
+                    Track Consignment
                 </Link>
 
                 <Link style={linkStyle} to="/contact">

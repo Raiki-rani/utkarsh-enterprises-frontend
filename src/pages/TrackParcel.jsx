@@ -49,7 +49,7 @@ function TrackParcel() {
                         color: "#0f172a",
                     }}
                 >
-                    📍 Track Parcel
+                    📍 Track Consignment
                 </h1>
 
                 <p
@@ -58,7 +58,7 @@ function TrackParcel() {
                         marginTop: "8px",
                     }}
                 >
-                    Enter your tracking number to view shipment details.
+                    Enter your consignment number to view shipment details.
                 </p>
 
             </div>
@@ -77,7 +77,7 @@ function TrackParcel() {
 
                 <input
                     type="text"
-                    placeholder="Enter Tracking Number"
+                    placeholder="Enter Consignment Number"
                     value={trackingNumber}
                     onChange={(e) =>
                         setTrackingNumber(e.target.value)
