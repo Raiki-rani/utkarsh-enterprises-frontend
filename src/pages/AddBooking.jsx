@@ -17,7 +17,11 @@ function AddBooking() {
         parcelType: "",
         weight: "",
         amount: "",
-        status: ""
+        status: "",
+        deliveryDate: "",
+        deliveryTime: "",
+        signatureUrl: "",
+        podImageUrl: ""
     });
 
     const handleChange = (e) => {
@@ -57,8 +61,6 @@ function AddBooking() {
             }}
         >
 
-            {/* Header */}
-
             <div style={{ marginBottom: "30px" }}>
 
                 <h1
@@ -81,8 +83,6 @@ function AddBooking() {
 
             </div>
 
-            {/* Card */}
-
             <div
                 style={{
                     maxWidth: "700px",
@@ -95,114 +95,95 @@ function AddBooking() {
             >
 
                 <label><strong>Tracking Number</strong></label>
-
                 <input
                     type="text"
                     name="trackingNumber"
-                    placeholder="Enter Tracking Number"
                     value={booking.trackingNumber}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Sender Name</strong></label>
-
                 <input
                     type="text"
                     name="senderName"
-                    placeholder="Enter Sender Name"
                     value={booking.senderName}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Sender Phone</strong></label>
-
                 <input
                     type="text"
                     name="senderPhone"
-                    placeholder="Enter Sender Phone"
                     value={booking.senderPhone}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Receiver Name</strong></label>
-
                 <input
                     type="text"
                     name="receiverName"
-                    placeholder="Enter Receiver Name"
                     value={booking.receiverName}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Receiver Phone</strong></label>
-
                 <input
                     type="text"
                     name="receiverPhone"
-                    placeholder="Enter Receiver Phone"
                     value={booking.receiverPhone}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>From City</strong></label>
-
                 <input
                     type="text"
                     name="fromCity"
-                    placeholder="Enter Source City"
                     value={booking.fromCity}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>To City</strong></label>
-
                 <input
                     type="text"
                     name="toCity"
-                    placeholder="Enter Destination City"
                     value={booking.toCity}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Parcel Type</strong></label>
-
                 <input
                     type="text"
                     name="parcelType"
-                    placeholder="Enter Parcel Type"
                     value={booking.parcelType}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Weight (kg)</strong></label>
-
                 <input
                     type="number"
                     name="weight"
-                    placeholder="Enter Weight"
                     value={booking.weight}
                     onChange={handleChange}
                     style={inputStyle}
                 />
 
                 <label><strong>Amount (₹)</strong></label>
-
                 <input
                     type="number"
                     name="amount"
-                    placeholder="Enter Booking Amount"
                     value={booking.amount}
                     onChange={handleChange}
                     style={inputStyle}
                 />
+
                 <label><strong>Booking Status</strong></label>
 
                 <select
@@ -219,15 +200,53 @@ function AddBooking() {
                     <option value="Cancelled">Cancelled</option>
                 </select>
 
+                <label><strong>Delivery Date</strong></label>
+                <input
+                    type="date"
+                    name="deliveryDate"
+                    value={booking.deliveryDate}
+                    onChange={handleChange}
+                    style={inputStyle}
+                />
+
+                <label><strong>Delivery Time</strong></label>
+                <input
+                    type="time"
+                    name="deliveryTime"
+                    value={booking.deliveryTime}
+                    onChange={handleChange}
+                    style={inputStyle}
+                />
+
+                <label><strong>Signature Image URL</strong></label>
+                <input
+                    type="text"
+                    name="signatureUrl"
+                    placeholder="https://example.com/signature.png"
+                    value={booking.signatureUrl}
+                    onChange={handleChange}
+                    style={inputStyle}
+                />
+
+                <label><strong>Delivery Photo URL</strong></label>
+                <input
+                    type="text"
+                    name="podImageUrl"
+                    placeholder="https://example.com/photo.jpg"
+                    value={booking.podImageUrl}
+                    onChange={handleChange}
+                    style={inputStyle}
+                />
                 {/* Buttons */}
 
                 <div
                     style={{
                         display: "flex",
                         gap: "15px",
-                        marginTop: "25px",
+                        marginTop: "30px",
                     }}
                 >
+
                     <button
                         onClick={() => navigate("/bookings")}
                         style={{
@@ -263,11 +282,13 @@ function AddBooking() {
                     >
                         🚚 Save Booking
                     </button>
+
                 </div>
 
             </div>
 
         </div>
+
     );
 }
 

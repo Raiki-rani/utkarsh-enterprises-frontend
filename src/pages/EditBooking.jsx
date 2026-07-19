@@ -19,6 +19,10 @@ function EditBooking() {
         weight: "",
         amount: "",
         status: "Booked",
+        deliveryDate: "",
+        deliveryTime: "",
+        signatureUrl: "",
+        podImageUrl: "",
     });
 
     useEffect(() => {
@@ -82,8 +86,6 @@ function EditBooking() {
             }}
         >
 
-            {/* Header */}
-
             <div style={{ marginBottom: "30px" }}>
 
                 <h1
@@ -106,8 +108,6 @@ function EditBooking() {
 
             </div>
 
-            {/* Card */}
-
             <div
                 style={{
                     maxWidth: "700px",
@@ -122,114 +122,95 @@ function EditBooking() {
                 <form onSubmit={updateBooking}>
 
                     <label><strong>Tracking Number</strong></label>
-
                     <input
                         type="text"
                         name="trackingNumber"
                         value={booking.trackingNumber}
                         onChange={handleChange}
-                        placeholder="Enter Tracking Number"
                         style={inputStyle}
                     />
 
                     <label><strong>Sender Name</strong></label>
-
                     <input
                         type="text"
                         name="senderName"
                         value={booking.senderName}
                         onChange={handleChange}
-                        placeholder="Enter Sender Name"
                         style={inputStyle}
                     />
 
                     <label><strong>Sender Phone</strong></label>
-
                     <input
                         type="text"
                         name="senderPhone"
                         value={booking.senderPhone}
                         onChange={handleChange}
-                        placeholder="Enter Sender Phone"
                         style={inputStyle}
                     />
 
                     <label><strong>Receiver Name</strong></label>
-
                     <input
                         type="text"
                         name="receiverName"
                         value={booking.receiverName}
                         onChange={handleChange}
-                        placeholder="Enter Receiver Name"
                         style={inputStyle}
                     />
 
                     <label><strong>Receiver Phone</strong></label>
-
                     <input
                         type="text"
                         name="receiverPhone"
                         value={booking.receiverPhone}
                         onChange={handleChange}
-                        placeholder="Enter Receiver Phone"
                         style={inputStyle}
                     />
 
                     <label><strong>From City</strong></label>
-
                     <input
                         type="text"
                         name="fromCity"
                         value={booking.fromCity}
                         onChange={handleChange}
-                        placeholder="Enter Source City"
                         style={inputStyle}
                     />
 
                     <label><strong>To City</strong></label>
-
                     <input
                         type="text"
                         name="toCity"
                         value={booking.toCity}
                         onChange={handleChange}
-                        placeholder="Enter Destination City"
                         style={inputStyle}
                     />
 
                     <label><strong>Parcel Type</strong></label>
-
                     <input
                         type="text"
                         name="parcelType"
                         value={booking.parcelType}
                         onChange={handleChange}
-                        placeholder="Enter Parcel Type"
                         style={inputStyle}
                     />
 
                     <label><strong>Weight (Kg)</strong></label>
-
                     <input
                         type="number"
                         name="weight"
                         value={booking.weight}
                         onChange={handleChange}
-                        placeholder="Enter Weight"
                         style={inputStyle}
                     />
 
                     <label><strong>Amount (₹)</strong></label>
-
                     <input
                         type="number"
                         name="amount"
                         value={booking.amount}
                         onChange={handleChange}
-                        placeholder="Enter Amount"
                         style={inputStyle}
                     />
+
                     <label><strong>Booking Status</strong></label>
 
                     <select
@@ -245,6 +226,43 @@ function EditBooking() {
                         <option value="Cancelled">Cancelled</option>
                     </select>
 
+                    <label><strong>Delivery Date</strong></label>
+                    <input
+                        type="date"
+                        name="deliveryDate"
+                        value={booking.deliveryDate || ""}
+                        onChange={handleChange}
+                        style={inputStyle}
+                    />
+
+                    <label><strong>Delivery Time</strong></label>
+                    <input
+                        type="time"
+                        name="deliveryTime"
+                        value={booking.deliveryTime || ""}
+                        onChange={handleChange}
+                        style={inputStyle}
+                    />
+
+                    <label><strong>Signature Image URL</strong></label>
+                    <input
+                        type="text"
+                        name="signatureUrl"
+                        value={booking.signatureUrl || ""}
+                        onChange={handleChange}
+                        placeholder="https://example.com/signature.png"
+                        style={inputStyle}
+                    />
+
+                    <label><strong>Delivery Photo URL</strong></label>
+                    <input
+                        type="text"
+                        name="podImageUrl"
+                        value={booking.podImageUrl || ""}
+                        onChange={handleChange}
+                        placeholder="https://example.com/photo.jpg"
+                        style={inputStyle}
+                    />
                     {/* Buttons */}
 
                     <div
@@ -294,10 +312,13 @@ function EditBooking() {
                     </div>
 
                 </form>
+
             </div>
 
         </div>
+
     );
+
 }
 
 const inputStyle = {

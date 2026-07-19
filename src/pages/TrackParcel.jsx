@@ -7,6 +7,7 @@ function TrackParcel() {
     const [booking, setBooking] = useState(null);
 
     const searchParcel = async () => {
+
         try {
 
             const response = await api.get(
@@ -22,16 +23,18 @@ function TrackParcel() {
             alert("Tracking Number Not Found");
 
             setBooking(null);
+
         }
+
     };
 
     return (
 
         <div
             style={{
-                padding: "30px",
                 background: "#f8fafc",
                 minHeight: "100vh",
+                padding: "35px",
             }}
         >
 
@@ -47,6 +50,7 @@ function TrackParcel() {
                     style={{
                         margin: 0,
                         color: "#0f172a",
+                        fontSize: "34px",
                     }}
                 >
                     📍 Track Consignment
@@ -54,11 +58,12 @@ function TrackParcel() {
 
                 <p
                     style={{
-                        color: "#64748b",
                         marginTop: "8px",
+                        color: "#64748b",
+                        fontSize: "16px",
                     }}
                 >
-                    Enter your consignment number to view shipment details.
+                    Enter your consignment number to view shipment details and Proof of Delivery.
                 </p>
 
             </div>
@@ -68,44 +73,66 @@ function TrackParcel() {
             <div
                 style={{
                     background: "white",
-                    padding: "25px",
                     borderRadius: "18px",
-                    boxShadow: "0 10px 25px rgba(0,0,0,.08)",
+                    padding: "30px",
+                    boxShadow: "0 12px 25px rgba(0,0,0,.08)",
                     marginBottom: "30px",
                 }}
             >
 
-                <input
-                    type="text"
-                    placeholder="Enter Consignment Number"
-                    value={trackingNumber}
-                    onChange={(e) =>
-                        setTrackingNumber(e.target.value)
-                    }
+                <h2
                     style={{
-                        width: "320px",
-                        padding: "12px",
-                        borderRadius: "10px",
-                        border: "1px solid #cbd5e1",
-                        marginRight: "10px",
-                        fontSize: "15px",
-                    }}
-                />
-
-                <button
-                    onClick={searchParcel}
-                    style={{
-                        background: "#2563eb",
-                        color: "white",
-                        border: "none",
-                        padding: "12px 24px",
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                        fontWeight: "bold",
+                        marginTop: 0,
+                        color: "#0f172a",
                     }}
                 >
-                    🔍 Track
-                </button>
+                    🔎 Search Consignment
+                </h2>
+
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "15px",
+                        flexWrap: "wrap",
+                        marginTop: "20px",
+                    }}
+                >
+
+                    <input
+                        type="text"
+                        placeholder="Enter Consignment Number"
+                        value={trackingNumber}
+                        onChange={(e) =>
+                            setTrackingNumber(e.target.value)
+                        }
+                        style={{
+                            flex: 1,
+                            minWidth: "280px",
+                            padding: "14px",
+                            borderRadius: "10px",
+                            border: "1px solid #cbd5e1",
+                            fontSize: "15px",
+                        }}
+                    />
+
+                    <button
+                        onClick={searchParcel}
+                        style={{
+                            background:
+                                "linear-gradient(135deg,#2563eb,#1d4ed8)",
+                            color: "white",
+                            border: "none",
+                            padding: "14px 28px",
+                            borderRadius: "10px",
+                            cursor: "pointer",
+                            fontWeight: "bold",
+                            fontSize: "15px",
+                        }}
+                    >
+                        🔍 Track Now
+                    </button>
+
+                </div>
 
             </div>
 
@@ -119,194 +146,570 @@ function TrackParcel() {
                         gap: "25px",
                     }}
                 >
-
                     {/* Parcel Details */}
 
-                    <div
-                        style={{
-                            background: "white",
-                            borderRadius: "18px",
-                            padding: "25px",
-                            boxShadow:
-                                "0 10px 25px rgba(0,0,0,.08)",
-                        }}
-                    >
+<div
+    style={{
+        background: "white",
+        borderRadius: "18px",
+        padding: "30px",
+        boxShadow: "0 12px 25px rgba(0,0,0,.08)",
+    }}
+>
 
-                        <h2
-                            style={{
-                                marginTop: 0,
-                                color: "#0f172a",
-                            }}
-                        >
-                            📦 Parcel Details
-                        </h2>
+    <h2
+        style={{
+            marginTop: 0,
+            color: "#0f172a",
+            marginBottom: "25px",
+        }}
+    >
+        📦 Parcel Details
+    </h2>
 
-                        <p>
-                            <strong>Tracking No:</strong><br />
-                            {booking.trackingNumber}
-                        </p>
+    <div style={{ marginBottom: "18px" }}>
+        <strong style={{ color: "#475569" }}>Tracking Number</strong>
+        <div style={{ marginTop: "6px", fontSize: "17px" }}>
+            {booking.trackingNumber}
+        </div>
+    </div>
 
-                        <p>
-                            <strong>Sender:</strong><br />
-                            {booking.senderName}
-                        </p>
+    <div style={{ marginBottom: "18px" }}>
+        <strong style={{ color: "#475569" }}>Sender</strong>
+        <div style={{ marginTop: "6px" }}>
+            {booking.senderName}
+        </div>
+    </div>
 
-                        <p>
-                            <strong>Receiver:</strong><br />
-                            {booking.receiverName}
-                        </p>
+    <div style={{ marginBottom: "18px" }}>
+        <strong style={{ color: "#475569" }}>Receiver</strong>
+        <div style={{ marginTop: "6px" }}>
+            {booking.receiverName}
+        </div>
+    </div>
 
-                        <p>
-                            <strong>Route:</strong><br />
-                            {booking.fromCity} ➜ {booking.toCity}
-                        </p>
+    <div style={{ marginBottom: "18px" }}>
+        <strong style={{ color: "#475569" }}>Route</strong>
+        <div style={{ marginTop: "6px" }}>
+            📍 {booking.fromCity} ➜ {booking.toCity}
+        </div>
+    </div>
 
-                        <p>
-                            <strong>Status:</strong>
-                        </p>
+    <div style={{ marginBottom: "25px" }}>
+        <strong style={{ color: "#475569" }}>Current Status</strong>
 
-                        <span
-                            style={{
-                                background:
-                                    booking.status === "Delivered"
-                                        ? "#22c55e"
-                                        : booking.status === "In Transit"
-                                        ? "#f59e0b"
-                                        : booking.status === "Out for Delivery"
-                                        ? "#8b5cf6"
-                                        : "#2563eb",
+        <div style={{ marginTop: "12px" }}>
 
-                                color: "white",
+            <span
+                style={{
+                    background:
+                        booking.status === "Delivered"
+                            ? "#16a34a"
+                            : booking.status === "Out for Delivery"
+                            ? "#7c3aed"
+                            : booking.status === "In Transit"
+                            ? "#f59e0b"
+                            : "#2563eb",
 
-                                padding: "10px 18px",
+                    color: "white",
 
-                                borderRadius: "20px",
+                    padding: "10px 20px",
 
-                                fontWeight: "bold",
-                            }}
-                        >
-                            {booking.status}
-                        </span>
+                    borderRadius: "25px",
 
-                    </div>
+                    fontWeight: "bold",
 
-                    {/* Shipment Timeline */}
-                    <div
-                        style={{
-                            background: "white",
-                            borderRadius: "18px",
-                            padding: "25px",
-                            boxShadow: "0 10px 25px rgba(0,0,0,.08)",
-                        }}
-                    >
-                        <h2
-                            style={{
-                                marginTop: 0,
-                                color: "#0f172a",
-                            }}
-                        >
-                            🚚 Shipment Progress
-                        </h2>
+                    display: "inline-block",
+                }}
+            >
+                {booking.status}
+            </span>
 
-                        <div
-                            style={{
-                                marginTop: "25px",
-                                lineHeight: "2.4",
-                                fontSize: "16px",
-                            }}
-                        >
-                            <p>
-                                {booking.status === "Booked" ||
-                                booking.status === "In Transit" ||
-                                booking.status === "Out for Delivery" ||
-                                booking.status === "Delivered"
-                                    ? "🟢"
-                                    : "⚪"}{" "}
-                                <strong>Booked</strong>
-                            </p>
+        </div>
 
-                            <div
-                                style={{
-                                    marginLeft: "12px",
-                                    color: "#94a3b8",
-                                }}
-                            >
-                                │
-                            </div>
+    </div>
 
-                            <p>
-                                {booking.status === "In Transit" ||
-                                booking.status === "Out for Delivery" ||
-                                booking.status === "Delivered"
-                                    ? "🟢"
-                                    : "⚪"}{" "}
-                                <strong>In Transit</strong>
-                            </p>
+    <hr
+        style={{
+            border: "none",
+            borderTop: "1px solid #e2e8f0",
+            margin: "25px 0",
+        }}
+    />
 
-                            <div
-                                style={{
-                                    marginLeft: "12px",
-                                    color: "#94a3b8",
-                                }}
-                            >
-                                │
-                            </div>
+    <div
+        style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "18px",
+        }}
+    >
 
-                            <p>
-                                {booking.status === "Out for Delivery" ||
-                                booking.status === "Delivered"
-                                    ? "🟢"
-                                    : "⚪"}{" "}
-                                <strong>Out for Delivery</strong>
-                            </p>
+        <div
+            style={{
+                background: "#eff6ff",
+                padding: "15px",
+                borderRadius: "12px",
+            }}
+        >
+            <strong>Total Stops</strong>
 
-                            <div
-                                style={{
-                                    marginLeft: "12px",
-                                    color: "#94a3b8",
-                                }}
-                            >
-                                │
-                            </div>
+            <div
+                style={{
+                    fontSize: "22px",
+                    marginTop: "8px",
+                    color: "#2563eb",
+                    fontWeight: "bold",
+                }}
+            >
+                4
+            </div>
 
-                            <p>
-                                {booking.status === "Delivered"
-                                    ? "🟢"
-                                    : "⚪"}{" "}
-                                <strong>Delivered</strong>
-                            </p>
-                        </div>
+        </div>
 
-                        <div
-                            style={{
-                                marginTop: "30px",
-                                padding: "15px",
-                                background: "#eff6ff",
-                                borderRadius: "12px",
-                                border: "1px solid #bfdbfe",
-                            }}
-                        >
-                            <strong>Current Status:</strong>
+        <div
+            style={{
+                background: "#f0fdf4",
+                padding: "15px",
+                borderRadius: "12px",
+            }}
+        >
+            <strong>Delivery Status</strong>
 
-                            <div
-                                style={{
-                                    marginTop: "10px",
-                                    color: "#2563eb",
-                                    fontWeight: "bold",
-                                    fontSize: "18px",
-                                }}
-                            >
-                                {booking.status}
-                            </div>
-                        </div>
-                    </div>
+            <div
+                style={{
+                    fontSize: "18px",
+                    marginTop: "8px",
+                    color: "#16a34a",
+                    fontWeight: "bold",
+                }}
+            >
+                {booking.status}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{/* Shipment Progress */}
+
+<div
+    style={{
+        background: "white",
+        borderRadius: "18px",
+        padding: "30px",
+        boxShadow: "0 12px 25px rgba(0,0,0,.08)",
+    }}
+>
+
+    <h2
+        style={{
+            marginTop: 0,
+            color: "#0f172a",
+            marginBottom: "25px",
+        }}
+    >
+        🚚 Shipment Progress
+    </h2>
+
+    <div
+        style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "18px",
+        }}
+    >
+
+        {/* Booked */}
+
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "15px",
+            }}
+        >
+            <div
+                style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background:
+                        booking.status === "Booked" ||
+                        booking.status === "In Transit" ||
+                        booking.status === "Out for Delivery" ||
+                        booking.status === "Delivered"
+                            ? "#22c55e"
+                            : "#cbd5e1",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                }}
+            >
+                ✓
+            </div>
+
+            <div>
+                <strong>Shipment Booked</strong>
+                <br />
+                <span style={{ color: "#64748b" }}>
+                    Parcel has been booked.
+                </span>
+            </div>
+        </div>
+
+        <div style={{ marginLeft: "20px", color: "#cbd5e1" }}>
+            │
+        </div>
+
+        {/* Transit */}
+
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "15px",
+            }}
+        >
+            <div
+                style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background:
+                        booking.status === "In Transit" ||
+                        booking.status === "Out for Delivery" ||
+                        booking.status === "Delivered"
+                            ? "#22c55e"
+                            : "#cbd5e1",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                }}
+            >
+                ✓
+            </div>
+
+            <div>
+                <strong>In Transit</strong>
+                <br />
+                <span style={{ color: "#64748b" }}>
+                    Shipment is moving to destination.
+                </span>
+            </div>
+        </div>
+
+        <div style={{ marginLeft: "20px", color: "#cbd5e1" }}>
+            │
+        </div>
+
+        {/* Out for Delivery */}
+
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "15px",
+            }}
+        >
+            <div
+                style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background:
+                        booking.status === "Out for Delivery" ||
+                        booking.status === "Delivered"
+                            ? "#22c55e"
+                            : "#cbd5e1",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                }}
+            >
+                🚚
+            </div>
+
+            <div>
+                <strong>Out for Delivery</strong>
+                <br />
+                <span style={{ color: "#64748b" }}>
+                    Courier is on the way.
+                </span>
+            </div>
+        </div>
+
+        <div style={{ marginLeft: "20px", color: "#cbd5e1" }}>
+            │
+        </div>
+
+        {/* Delivered */}
+
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "15px",
+            }}
+        >
+            <div
+                style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background:
+                        booking.status === "Delivered"
+                            ? "#22c55e"
+                            : "#cbd5e1",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                }}
+            >
+                📦
+            </div>
+
+            <div>
+                <strong>Delivered</strong>
+                <br />
+                <span style={{ color: "#64748b" }}>
+                    Shipment delivered successfully.
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div
+        style={{
+            marginTop: "30px",
+            padding: "18px",
+            background: "#eff6ff",
+            borderRadius: "12px",
+            border: "1px solid #bfdbfe",
+        }}
+    >
+
+        <strong>Current Status</strong>
+
+        <div
+            style={{
+                marginTop: "10px",
+                fontSize: "22px",
+                color: "#2563eb",
+                fontWeight: "bold",
+            }}
+        >
+            {booking.status}
+        </div>
+
+    </div>
+
+</div>
+{/* Proof of Delivery (POD) */}
+
+{booking.status === "Delivered" ? (
+
+<div
+    style={{
+        gridColumn: "1 / -1",
+        background: "white",
+        borderRadius: "18px",
+        padding: "30px",
+        boxShadow: "0 12px 25px rgba(0,0,0,.08)",
+        marginTop: "10px",
+    }}
+>
+
+    <h2
+        style={{
+            marginTop: 0,
+            color: "#0f172a",
+            marginBottom: "25px",
+        }}
+    >
+        ✅ Proof of Delivery (POD)
+    </h2>
+
+    <div
+        style={{
+            display: "grid",
+            gridTemplateColumns:
+                "repeat(auto-fit,minmax(280px,1fr))",
+            gap: "25px",
+        }}
+    >
+
+        {/* Delivery Details */}
+
+        <div
+            style={{
+                background: "#ecfdf5",
+                border: "2px solid #22c55e",
+                borderRadius: "15px",
+                padding: "25px",
+            }}
+        >
+
+            <h3 style={{ marginTop: 0 }}>
+                🎉 Delivered Successfully
+            </h3>
+
+            <p>
+                <strong>Receiver</strong>
+                <br />
+                {booking.receiverName}
+            </p>
+
+            <p>
+                <strong>Delivery Date</strong>
+                <br />
+                {booking.deliveryDate || "21 Jul 2026"}
+            </p>
+
+            <p>
+                <strong>Delivery Time</strong>
+                <br />
+                {booking.deliveryTime || "04:35 PM"}
+            </p>
+
+        </div>
+
+        {/* Signature */}
+
+        <div
+            style={{
+                background: "#f8fafc",
+                borderRadius: "15px",
+                padding: "20px",
+                textAlign: "center",
+            }}
+        >
+
+            <h3>✍ Recipient Signature</h3>
+
+            <img
+                src={
+                    booking.signatureUrl ||
+                    "https://via.placeholder.com/220x90?text=Signature"
+                }
+                alt="Signature"
+                style={{
+                    width: "220px",
+                    height: "90px",
+                    objectFit: "contain",
+                    border: "1px solid #e2e8f0",
+                    borderRadius: "8px",
+                }}
+            />
+
+            <br />
+
+            <button
+                style={{
+                    marginTop: "15px",
+                    background: "#2563eb",
+                    color: "white",
+                    border: "none",
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                }}
+            >
+                Download Signature
+            </button>
+
+        </div>
+
+        {/* Delivery Photo */}
+
+        <div
+            style={{
+                background: "#f8fafc",
+                borderRadius: "15px",
+                padding: "20px",
+                textAlign: "center",
+            }}
+        >
+
+            <h3>📷 Delivery Photo</h3>
+
+            <img
+                src={
+                    booking.podImageUrl ||
+                    "https://via.placeholder.com/300x200?text=Delivery+Photo"
+                }
+                alt="Delivery"
+                style={{
+                    width: "100%",
+                    height: "200px",
+                    objectFit: "cover",
+                    borderRadius: "12px",
+                    border: "1px solid #e2e8f0",
+                }}
+            />
+
+            <button
+                style={{
+                    marginTop: "15px",
+                    background: "#2563eb",
+                    color: "white",
+                    border: "none",
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                }}
+            >
+                Download Photo
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+) : (
+
+<div
+    style={{
+        gridColumn: "1 / -1",
+        background: "#fff7ed",
+        border: "2px dashed #fb923c",
+        borderRadius: "15px",
+        padding: "25px",
+        textAlign: "center",
+        marginTop: "10px",
+    }}
+>
+
+    <h3>📦 Proof of Delivery</h3>
+
+    <p style={{ color: "#64748b" }}>
+        Proof of Delivery (POD) will be available once the shipment has been delivered.
+    </p>
+
+</div>
+
+)}
 
                 </div>
 
             )}
 
         </div>
+
     );
+
 }
 
 export default TrackParcel;
