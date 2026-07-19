@@ -577,9 +577,19 @@ function TrackParcel() {
             </p>
 
             <p>
-                <strong>Delivery Time</strong>
-                <br />
-                {booking.deliveryTime || "04:35 PM"}
+            <strong>Delivery Time</strong>
+            <br />
+            {
+             booking.deliveryTime
+              ? new Date(`1970-01-01T$
+            {booking.deliveryTime}
+            `).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true,
+                })
+             : "04:35 PM"
+            }
             </p>
 
         </div>

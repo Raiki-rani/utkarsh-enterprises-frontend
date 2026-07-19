@@ -71,6 +71,7 @@ function EditBooking() {
         e.preventDefault();
 
         try {
+            console.log("Booking being sent:", booking);
 
             await api.put(`/bookings/update/${id}`, booking);
 
