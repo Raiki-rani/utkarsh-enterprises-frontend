@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import QRCode from "react-qr-code";
 
 function Bookings() {
 
@@ -332,6 +333,20 @@ function Bookings() {
                                         >
                                             📄 PDF
                                         </button>
+                                        <div
+                                            style={{
+                                                marginTop: "10px",
+                                                background: "white",
+                                                padding: "8px",
+                                                borderRadius: "10px",
+                                                display: "inline-block",
+                                            }}
+                                        >
+                                            <QRCode
+                                        value={`https://utkarsh-enterprises-frontend-production.up.railway.app/track`}
+                                                size={70}
+                                            />
+                                    </div>
                                     </td>
                                 </tr>
 
