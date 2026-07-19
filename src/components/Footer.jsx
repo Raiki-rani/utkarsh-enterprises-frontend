@@ -23,7 +23,7 @@ function Footer() {
 
                 <div>
                     <h3>Contact</h3>
-                    <p>📞 +91 9386064051</p>
+                    <p>📞 +91 7488017902</p>
                     <p>📍 Ranchi, Jharkhand</p>
                 </div>
 

@@ -1,6 +1,22 @@
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import api from "../services/api";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 
 function TrackParcel() {
 
@@ -43,8 +59,19 @@ const trackingUrl =
   booking
     ? `https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${booking.trackingNumber}`
     : "";
+    const locations = {
+    "Booked": [23.3441, 85.3096],            // Ranchi
+    "In Transit": [23.6102, 85.2799],        // Dhanbad
+    "Out for Delivery": [20.2961, 85.8245],  // Bhubaneswar
+    "Delivered": [20.2961, 85.8245],         // Bhubaneswar
+};
 
-return (
+const currentPosition =
+    booking && booking.status
+        ? locations[booking.status]
+        : [23.3441, 85.3096];
+
+
 
     return (
 
@@ -381,6 +408,41 @@ return (
 
         <div style={{ marginLeft: "20px", color: "#cbd5e1" }}>
             │
+        </div>
+        <div
+            style={{
+                background: "white",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: "30px",
+                boxShadow: "0 10px 25px rgba(0,0,0,.08)",
+            }}
+        >
+            <h2>📍 Live Shipment Location</h2>
+
+            <MapContainer
+                center={currentPosition}
+                zoom={12}
+                style={{
+                    height: "400px",
+                    width: "100%",
+                    borderRadius: "12px",
+                }}
+            >
+                <TileLayer
+                    attribution='&copy; 
+                    OpenStreetMap contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={currentPosition}>
+                    <Popup>
+                        <strong>{booking?.trackingNumber}</strong>
+                        <br />
+                        Status: 
+                        {booking?.status}
+                    </Popup>
+                </Marker>
+            </MapContainer>
         </div>
 
         {/* Transit */}
