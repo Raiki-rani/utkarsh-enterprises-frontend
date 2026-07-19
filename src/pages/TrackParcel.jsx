@@ -447,6 +447,11 @@ const currentPosition =
 
         {/* Transit */}
 
+        <div style={{ marginLeft: "20px",
+         color: "#64748b" }}>
+
+        </div>
+
         <div
             style={{
                 display: "flex",
