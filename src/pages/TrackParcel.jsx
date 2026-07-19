@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import api from "../services/api";
 
 function TrackParcel() {
 
     const [trackingNumber, setTrackingNumber] = useState("");
+    const [searchParams] = useSearchParams();
     const [booking, setBooking] = useState(null);
 
     const searchParcel = async () => {
@@ -27,6 +29,22 @@ function TrackParcel() {
         }
 
     };
+    useEffect(() => {
+
+    const tracking = searchParams.get("tracking");
+
+    if (tracking) {
+        setTrackingNumber(tracking);
+    }
+
+}, [searchParams]);
+
+const trackingUrl =
+  booking
+    ? `https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${booking.trackingNumber}`
+    : "";
+
+return (
 
     return (
 

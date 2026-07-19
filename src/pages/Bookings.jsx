@@ -343,8 +343,8 @@ function Bookings() {
                                             }}
                                         >
                                             <QRCode
-                                        value={`https://utkarsh-enterprises-frontend-production.up.railway.app/track`}
-                                                size={70}
+                                            value={`https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${item.trackingNumber}`}
+                                            size={70}
                                             />
                                     </div>
                                     </td>
