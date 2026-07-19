@@ -659,17 +659,13 @@ const currentPosition =
             <p>
             <strong>Delivery Time</strong>
             <br />
-            {
-             booking.deliveryTime
-              ? new Date(`1970-01-01T$
-            {booking.deliveryTime}
-            `).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: true,
-                })
-             : "04:35 PM"
-            }
+            {booking.deliveryTime
+             ? (() => {
+                const [hour, minute] = booking.deliveryTime.split(":");
+                const h = Number(hour);
+                return `${h % 12 || 12}:${minute} ${h >= 12 ? "PM" : "AM"}`;
+            })()
+            : "N/A"}
             </p>
 
         </div>
