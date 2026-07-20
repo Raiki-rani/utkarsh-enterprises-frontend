@@ -87,21 +87,17 @@ function Bookings() {
 
         const finalY = doc.lastAutoTable.finalY;
 
-        doc.setFontSize(12);
-        doc.setTextColor(40);
-        doc.text(
-            "Thank you for choosing Utkarsh Enterprises!",
-            45,
-            finalY + 15
-        );
+        doc.addPage();
 
-        doc.setFontSize(10);
-        doc.setTextColor(120);
-        doc.text(
-            "This is a computer-generated receipt.",
-            52,
-            finalY + 23
-        );
+        doc.setFontSize(16);
+        doc.setTextColor(37, 99, 235);
+        doc.text("Thank You!", 85, 30);
+
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.text("Thank you for choosing Utkarsh Enterprises.", 35, 50);
+
+        doc.text("This is a computer-generated receipt.", 40, 65);
         const trackingUrl = `https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${booking.trackingNumber}`;
 
         const qrDataUrl = await QRCodeLib.toDataURL(trackingUrl);
