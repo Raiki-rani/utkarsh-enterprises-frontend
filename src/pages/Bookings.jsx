@@ -56,8 +56,8 @@ function Bookings() {
         doc.text("Courier & Logistics Services", 55, 23);
 
         doc.setFontSize(10);
-        doc.text("Email: support@utkarshenterprises.com", 15, 30);
-        doc.text("Phone: +91 9876543210", 135, 30);
+        doc.text("Email: utkarshenterprises@gmail.com", 15, 30);
+        doc.text("Phone: +91 7488017902", 135, 30);
 
         autoTable(doc, {
             startY: 45,
