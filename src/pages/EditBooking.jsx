@@ -138,7 +138,12 @@ function EditBooking() {
 
         } catch (error) {
 
-            console.log(error);
+            console.log("Full Error:", error);
+
+            if (error.response) {
+                console.log("Status:", error.response.status);
+                console.log("Data:", error.response.data);
+            }
 
             alert("❌ Failed to Update Booking!");
 
