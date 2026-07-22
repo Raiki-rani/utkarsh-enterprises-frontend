@@ -15,6 +15,7 @@ function AddBooking() {
         fromCity: "",
         toCity: "",
         parcelType: "",
+        deliveryType: "Standard",
         weight: "",
         amount: "",
         status: "",
@@ -28,10 +29,51 @@ function AddBooking() {
     const [podPreview, setPodPreview] = useState("");
 
     const handleChange = (e) => {
-        setBooking({
+        const updatedBooking = {
             ...booking,
             [e.target.name]: e.target.value,
-        });
+        };
+        updatedBooking.amount = calculateAmount(updatedBooking);
+        setBooking(updatedBooking);
+    };
+    const calculateAmount = (booking) => {
+        let amount = 0;
+
+  // Base Price
+        switch (booking.parcelType) {
+            case "Documents":
+                amount += 50;
+                break;
+            case "Electronics":
+                amount += 100;
+                break;
+            case "Fragile":
+                amount += 150;
+                break;
+            case "Clothes":
+                amount += 70;
+                break;
+            default:
+                amount += 50;
+        }
+
+  // Weight Charge
+        amount += Number(booking.weight || 0) * 20;
+
+  // Distance Charge
+        if (booking.fromCity && booking.toCity) {
+            if (booking.fromCity.toLowerCase() !==booking.toCity.toLowerCase()) {
+                amount += 150;
+            } else {
+                amount += 30;
+            }
+        }
+
+  // Delivery Charge
+        if (booking.deliveryType === "Express") {
+            amount += 100;
+        }
+        return amount;
     };
 
     const handleSignatureUpload = (e) => {
@@ -213,6 +255,16 @@ function AddBooking() {
             onChange={handleChange}
             style={inputStyle}
         />
+        <label><strong>Delivery Type</strong></label>
+        <select
+            name="deliveryType"
+            value={booking.deliveryType}
+            onChange={handleChange}
+            style={inputStyle}
+        >
+        <option value="Standard">Standard</option>
+        <option value="Express">Express</option>
+        </select>
 
         <label><strong>Weight (Kg)</strong></label>
         <input
@@ -325,6 +377,26 @@ function AddBooking() {
                 />
             </div>
         )}
+        <div
+            style={{
+                background: "#f8fafc",
+                border: "1px solid #dbeafe",
+                borderRadius: "12px",
+                padding: "20px",
+                marginTop: "20px",
+                marginBottom: "20px",
+            }}
+        >
+            <h3 style={{ color: "#2563eb", marginBottom: "10px" }}>
+                📦 Shipping Summary
+            </h3>
+
+            <p><strong>Weight:</strong> {booking.weight || 0} Kg</p>
+
+            <p><strong>Delivery Type:</strong> Standard</p>
+
+            <p><strong>Estimated Shipping Cost:</strong>₹{booking.weight ? booking.weight * 50 : 0}</p>
+        </div>
 
         {/* Buttons */}
 

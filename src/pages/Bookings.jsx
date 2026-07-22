@@ -363,6 +363,20 @@ function Bookings() {
             >
                 📄 PDF
             </button>
+            <button
+                style={{
+                    background: "#0ea5e9",
+                    color: "white",
+                    border: "none",
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    marginTop: "6px",
+                    width: "100%",
+                }}
+            >
+                📦 Details
+            </button>
 
             <div
                 style={{
