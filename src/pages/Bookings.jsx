@@ -36,9 +36,7 @@ function Bookings() {
                     alert("Booking Deleted Successfully!");
                     loadBookings();
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
+                .catch((error) => console.log(error));
         }
     };
 
@@ -46,7 +44,6 @@ function Bookings() {
 
         const doc = new jsPDF();
 
-        // Header
         doc.setFillColor(37, 99, 235);
         doc.rect(0, 0, 210, 35, "F");
 
@@ -68,7 +65,6 @@ function Bookings() {
             headStyles: {
                 fillColor: [37, 99, 235],
                 textColor: 255,
-                halign: "center",
             },
             body: [
                 ["Tracking Number", booking.trackingNumber],
@@ -87,27 +83,12 @@ function Bookings() {
             ],
         });
 
-        const finalY = doc.lastAutoTable.finalY;
-
-        doc.addPage();
-
-        doc.setFontSize(16);
-        doc.setTextColor(37, 99, 235);
-        doc.text("Thank You!", 85, 30);
-
-        doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0);
-        doc.text("Thank you for choosing Utkarsh Enterprises.", 35, 50);
-
-        doc.text("This is a computer-generated receipt.", 40, 65);
-        const trackingUrl = `https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${booking.trackingNumber}`;
+        const trackingUrl =
+            `https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${booking.trackingNumber}`;
 
         const qrDataUrl = await QRCodeLib.toDataURL(trackingUrl);
 
-        doc.addImage(qrDataUrl, "PNG", 150, finalY + 5, 40, 40);
-
-        doc.setFontSize(9);
-        doc.text("Scan to Track", 158, finalY + 50);
+        doc.addImage(qrDataUrl, "PNG", 150, 220, 40, 40);
 
         doc.save(`Booking_${booking.trackingNumber}.pdf`);
     };
@@ -117,6 +98,7 @@ function Bookings() {
     );
 
     return (
+        <>
         <div
     style={{
         padding: "30px",
@@ -244,240 +226,224 @@ function Bookings() {
 
             <tbody>
                 {filteredBookings.length === 0 ? (
-                    <tr>
-                        <td
-                            colSpan="9"
-                            style={{
-                                padding: "30px",
-                                textAlign: "center",
-                                color: "#64748b",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            No Bookings Found
-                        </td>
-                    </tr>
-                ) : (
-                    filteredBookings.map((item, index) => (
-                        <tr
-    key={item.id}
-    style={{
-        background: index % 2 === 0 ? "#f8fafc" : "#ffffff",
-        borderBottom: "1px solid #e5e7eb",
-    }}
->
-    <td style={{ padding: "15px" }}>{item.id}</td>
-
-    <td
-        style={{
-            color: "#2563eb",
-            fontWeight: "bold",
-        }}
-    >
-        {item.trackingNumber}
-    </td>
-
-    <td>{item.senderName}</td>
-    <td>{item.receiverName}</td>
-    <td>{item.fromCity}</td>
-    <td>{item.toCity}</td>
-
-    <td
-        style={{
-            fontWeight: "bold",
-        }}
-    >
-        ₹ {item.amount}
-    </td>
-
-    <td>
-        <span
+    <tr>
+        <td
+            colSpan="9"
             style={{
-                background:
-                    item.status === "Delivered"
-                        ? "#22c55e"
-                        : item.status === "In Transit"
-                        ? "#f59e0b"
-                        : item.status === "Out for Delivery"
-                        ? "#8b5cf6"
-                        : "#2563eb",
-                color: "white",
-                padding: "8px 16px",
-                borderRadius: "20px",
+                padding: "30px",
+                textAlign: "center",
+                color: "#64748b",
                 fontWeight: "bold",
-                display: "inline-block",
             }}
         >
-            {item.status}
-        </span>
-    </td>
+            No Bookings Found
+        </td>
+    </tr>
+) : (
+    filteredBookings.map((item, index) => (
+        <tr
+            key={item.id}
+            style={{
+                background: index % 2 === 0 ? "#f8fafc" : "#ffffff",
+                borderBottom: "1px solid #e5e7eb",
+            }}
+        >
+            <td style={{ padding: "15px" }}>{item.id}</td>
 
-    <td>
+            <td style={{ color: "#2563eb", fontWeight: "bold" }}>
+                {item.trackingNumber}
+            </td>
+
+            <td>{item.senderName}</td>
+            <td>{item.receiverName}</td>
+            <td>{item.fromCity}</td>
+            <td>{item.toCity}</td>
+
+            <td style={{ fontWeight: "bold" }}>
+                ₹ {item.amount}
+            </td>
+
+            <td>
+                <span
+                    style={{
+                        background:
+                            item.status === "Delivered"
+                                ? "#22c55e"
+                                : item.status === "In Transit"
+                                ? "#f59e0b"
+                                : item.status === "Out for Delivery"
+                                ? "#8b5cf6"
+                                : "#2563eb",
+                        color: "white",
+                        padding: "8px 16px",
+                        borderRadius: "20px",
+                        fontWeight: "bold",
+                        display: "inline-block",
+                    }}
+                >
+                    {item.status}
+                </span>
+            </td>
+
+            <td>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                        alignItems: "center",
+                    }}
+                >
+                    <button
+                        onClick={() => navigate(`/bookings/edit/${item.id}`)}
+                        style={{
+                            background: "#f59e0b",
+                            color: "white",
+                            border: "none",
+                            padding: "8px 15px",
+                            borderRadius: "8px",
+                            cursor: "pointer",
+                            width: "100%",
+                        }}
+                    >
+                        ✏ Edit
+                    </button>
+
+                    <button
+                        onClick={() => deleteBooking(item.id)}
+                        style={{
+                            background: "#ef4444",
+                            color: "white",
+                            border: "none",
+                            padding: "8px 15px",
+                            borderRadius: "8px",
+                            cursor: "pointer",
+                            width: "100%",
+                        }}
+                    >
+                        🗑 Delete
+                    </button>
+
+                    <button
+                        onClick={() => generatePDF(item)}
+                        style={{
+                            background: "#2563eb",
+                            color: "white",
+                            border: "none",
+                            padding: "8px 15px",
+                            borderRadius: "8px",
+                            cursor: "pointer",
+                            width: "100%",
+                        }}
+                    >
+                        📄 PDF
+                    </button>
+
+                    <button
+                        onClick={() => {
+                            setSelectedBooking(item);
+                            setShowDetails(true);
+                        }}
+                        style={{
+                            background: "#0ea5e9",
+                            color: "white",
+                            border: "none",
+                            padding: "8px 15px",
+                            borderRadius: "8px",
+                            cursor: "pointer",
+                            width: "100%",
+                        }}
+                    >
+                        📦 Details
+                    </button>
+
+                    <div
+                        style={{
+                            marginTop: "8px",
+                            background: "white",
+                            padding: "8px",
+                            borderRadius: "10px",
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                        }}
+                    >
+                        <QRCode
+                            value={`https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${item.trackingNumber}`}
+                            size={70}
+                        />
+                    </div>
+                </div>
+            </td>
+        </tr>
+    ))
+)}
+            </tbody>
+            </table>
+    </div>
+
+    {showDetails && selectedBooking && (
         <div
             style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background: "rgba(0,0,0,0.5)",
                 display: "flex",
-                flexDirection: "column",
-                gap: "8px",
+                justifyContent: "center",
                 alignItems: "center",
+                zIndex: 9999,
             }}
         >
-            <button
-                onClick={() => navigate(`/bookings/edit/${item.id}`)}
-                style={{
-                    background: "#f59e0b",
-                    color: "white",
-                    border: "none",
-                    padding: "8px 15px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    width: "100%",
-                }}
-            >
-                ✏ Edit
-            </button>
-
-            <button
-                onClick={() => deleteBooking(item.id)}
-                style={{
-                    background: "#ef4444",
-                    color: "white",
-                    border: "none",
-                    padding: "8px 15px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    width: "100%",
-                }}
-            >
-                🗑 Delete
-            </button>
-
-            <button
-                onClick={() => generatePDF(item)}
-                style={{
-                    background: "#2563eb",
-                    color: "white",
-                    border: "none",
-                    padding: "8px 15px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    width: "100%",
-                }}
-            >
-                📄 PDF
-            </button>
-            <button
-                onClick={() => {
-                    setSelectedBooking(item);
-                    setShowDetails(true);
-                }}
-                style={{
-                    background: "#0ea5e9",
-                    color: "white",
-                    border: "none",
-                    padding: "8px 12px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    marginTop: "6px",
-                    width: "100%",
-                }}
-            >
-                📦 Details
-            </button>
-
             <div
                 style={{
-                    marginTop: "8px",
                     background: "white",
-                    padding: "8px",
-                    borderRadius: "10px",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                    padding: "25px",
+                    borderRadius: "15px",
+                    width: "500px",
+                    maxHeight: "80vh",
+                    overflowY: "auto",
                 }}
             >
-                <QRCode
-                    value={`https://utkarsh-enterprises-frontend-production.up.railway.app/track?tracking=${item.trackingNumber}`}
-                    size={70}
-                />
+                <h2 style={{ color: "#2563eb", marginBottom: "20px" }}>
+                    📦 Booking Details
+                </h2>
+
+                <p><strong>Tracking No:</strong> {selectedBooking.trackingNumber}</p>
+                <p><strong>Sender:</strong> {selectedBooking.senderName}</p>
+                <p><strong>Sender Phone:</strong> {selectedBooking.senderPhone}</p>
+                <p><strong>Receiver:</strong> {selectedBooking.receiverName}</p>
+                <p><strong>Receiver Phone:</strong> {selectedBooking.receiverPhone}</p>
+                <p><strong>From:</strong> {selectedBooking.fromCity}</p>
+                <p><strong>To:</strong> {selectedBooking.toCity}</p>
+                <p><strong>Parcel Type:</strong> {selectedBooking.parcelType}</p>
+                <p><strong>Weight:</strong> {selectedBooking.weight} Kg</p>
+                <p><strong>Amount:</strong> ₹ {selectedBooking.amount}</p>
+                <p><strong>Status:</strong> {selectedBooking.status}</p>
+                <p><strong>Delivery Date:</strong> {selectedBooking.deliveryDate || "Not Delivered"}</p>
+                <p><strong>Delivery Time:</strong> {selectedBooking.deliveryTime || "-"}</p>
+
+                <button
+                    onClick={() => setShowDetails(false)}
+                    style={{
+                        marginTop: "20px",
+                        background: "#ef4444",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 20px",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        width: "100%",
+                    }}
+                >
+                    Close
+                </button>
             </div>
         </div>
-    </td>
-</tr>
-                    ))
-                )}
-            </tbody>
-        </table>
-    </div>
+    )}
 </div>
-{showDetails && selectedBooking && (
-  <div
-    style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      background: "rgba(0,0,0,0.5)",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      zIndex: 9999,
-    }}
-  >
-    <div
-      style={{
-        background: "white",
-        padding: "25px",
-        borderRadius: "15px",
-        width: "500px",
-        maxHeight: "80vh",
-        overflowY: "auto",
-      }}
-    >
-      <h2 style={{ color: "#2563eb", marginBottom: "20px" }}>
-        📦 Booking Details
-      </h2>
-
-      <p><strong>Tracking No:</strong> {selectedBooking.trackingNumber}</p>
-      <p><strong>Sender:</strong> {selectedBooking.senderName}</p>
-      <p><strong>Receiver:</strong> {selectedBooking.receiverName}</p>
-      <p><strong>From:</strong> {selectedBooking.fromCity}</p>
-      <p><strong>To:</strong> {selectedBooking.toCity}</p>
-      <p><strong>Parcel Type:</strong> {selectedBooking.parcelType}</p>
-      <p><strong>Weight:</strong> {selectedBooking.weight} Kg</p>
-      <p><strong>Amount:</strong> ₹ {selectedBooking.amount}</p>
-      <p><strong>Status:</strong> {selectedBooking.status}</p>
-      <p><strong>Delivery Date:</strong> {selectedBooking.deliveryDate || "Not Delivered"}</p>
-      <p><strong>Delivery Time:</strong> {selectedBooking.deliveryTime || "-"}</p>
-
-      <button
-        onClick={() => setShowDetails(false)}
-        style={{
-          marginTop: "20px",
-          background: "#ef4444",
-          color: "white",
-          border: "none",
-          padding: "10px 20px",
-          borderRadius: "8px",
-          cursor: "pointer",
-        }}
-      >
-        Close
-      </button>
-    </div>
-  </div>
-)}
-
-
-
-
-
-
-
-
-
-
-
-
-    );
+</>
+);
 }
 
 export default Bookings;
