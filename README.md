@@ -1,16 +1,134 @@
-# React + Vite
+# 🚚 Utkarsh Enterprises - Courier Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern full-stack Courier & Logistics Management System developed using React, Spring Boot, and MySQL. The application helps manage courier bookings, customer details, shipment tracking, proof of delivery, and reports.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Features
 
-## React Compiler
+- 📦 Booking Management
+- 👥 Customer Management
+- 📦 Product Management
+- 🔍 Track Consignment using Tracking Number
+- 📄 PDF Receipt Generation
+- 📱 QR Code for Parcel Tracking
+- 📍 Dynamic Shipment Timeline
+- 📝 Proof of Delivery (POD)
+- ✍️ Digital Signature Upload
+- 🖼️ Delivery Image Upload
+- 📊 Reports Dashboard
+- 📱 Responsive User Interface
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+- React.js
+- Vite
+- React Router
+- Axios
+- CSS
+
+### Backend
+- Spring Boot
+- Spring Data JPA
+- REST API
+
+### Database
+- MySQL
+
+### Deployment
+- Railway
+
+---
+
+## 📷 Screenshots
+
+> Add screenshots of:
+- Home Page
+- Dashboard
+- Booking Management
+- Booking Details Popup
+- Track Consignment
+- Reports
+- Proof of Delivery
+
+---
+
+## 🚀 Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Raiki-rani/utkarsh-enterprises-frontend.git
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Project
+
+```bash
+npm run dev
+```
+
+---
+
+## 🌐 Live Demo
+
+Frontend:
+https://utkarsh-enterprises-frontend-production.up.railway.app
+
+Backend:
+(Add your backend Railway URL here)
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+ ├── pages/
+ ├── components/
+ ├── services/
+ ├── assets/
+ └── App.jsx
+```
+
+---
+
+## 📌 Future Enhancements
+
+- Admin Authentication
+- Employee Login
+- Email Notifications
+- SMS Notifications
+- Live GPS Tracking
+- Analytics Dashboard
+- Barcode Generation
+- Mobile App
+
+---
+
+## 👨‍💻 Developer
+
+**Raiki Rani**
+
+GitHub:
+https://github.com/Raiki-rani
+
+LinkedIn:
+(Add your LinkedIn URL)
+
+Email:
+utkarshenterprises@gmail.com
+
+---
+
+## 📄 License
+
+This project is created for educational and portfolio purposes.
