@@ -24,6 +24,7 @@ function Footer() {
                 <div>
                     <h3>Contact</h3>
                     <p>📞 +91 7488017902</p>
+                    <p>📧 utkarshenterprises@gmail.com</p>
                     <p>📍 Ranchi, Jharkhand</p>
                 </div>
 

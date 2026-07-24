@@ -63,13 +63,13 @@ function Contact() {
 
                     <p>📍 Ranchi, Jharkhand, India</p>
 
-                    <p>📞 +91 9876543210</p>
+                    <p>📞 +91 7488017902</p>
 
                     <p>✉️ info@utkarshenterprises.com</p>
 
                     <p>🕒 Monday - Saturday</p>
 
-                    <p>9:00 AM - 7:00 PM</p>
+                    <p>9:00 AM - 9:00 PM</p>
                 </div>
 
                 {/* Contact Form */}
