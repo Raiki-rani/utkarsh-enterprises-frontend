@@ -10,6 +10,8 @@ function Bookings() {
 
     const [bookings, setBookings] = useState([]);
     const [search, setSearch] = useState("");
+    const [selectedBooking, setSelectedBooking] = useState(null);
+    const [showDetails, setShowDetails] = useState(false);
 
     const navigate = useNavigate();
 
@@ -364,6 +366,10 @@ function Bookings() {
                 📄 PDF
             </button>
             <button
+                onClick={() => {
+                    setSelectedBooking(item);
+                    setShowDetails(true);
+                }}
                 style={{
                     background: "#0ea5e9",
                     color: "white",
@@ -401,6 +407,76 @@ function Bookings() {
         </table>
     </div>
 </div>
+{showDetails && selectedBooking && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: "rgba(0,0,0,0.5)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "25px",
+        borderRadius: "15px",
+        width: "500px",
+        maxHeight: "80vh",
+        overflowY: "auto",
+      }}
+    >
+      <h2 style={{ color: "#2563eb", marginBottom: "20px" }}>
+        📦 Booking Details
+      </h2>
+
+      <p><strong>Tracking No:</strong> {selectedBooking.trackingNumber}</p>
+      <p><strong>Sender:</strong> {selectedBooking.senderName}</p>
+      <p><strong>Receiver:</strong> {selectedBooking.receiverName}</p>
+      <p><strong>From:</strong> {selectedBooking.fromCity}</p>
+      <p><strong>To:</strong> {selectedBooking.toCity}</p>
+      <p><strong>Parcel Type:</strong> {selectedBooking.parcelType}</p>
+      <p><strong>Weight:</strong> {selectedBooking.weight} Kg</p>
+      <p><strong>Amount:</strong> ₹ {selectedBooking.amount}</p>
+      <p><strong>Status:</strong> {selectedBooking.status}</p>
+      <p><strong>Delivery Date:</strong> {selectedBooking.deliveryDate || "Not Delivered"}</p>
+      <p><strong>Delivery Time:</strong> {selectedBooking.deliveryTime || "-"}</p>
+
+      <button
+        onClick={() => setShowDetails(false)}
+        style={{
+          marginTop: "20px",
+          background: "#ef4444",
+          color: "white",
+          border: "none",
+          padding: "10px 20px",
+          borderRadius: "8px",
+          cursor: "pointer",
+        }}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+
+
+
     );
 }
 
