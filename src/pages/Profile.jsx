@@ -34,17 +34,17 @@ function Profile() {
 
             <p><strong>Company:</strong> Utkarsh Enterprises</p>
 
-            <p><strong>Owner:</strong> Rajeev Kumar Singh</p>
+            <p><strong>Owner:</strong> Nitu Kumari</p>
 
             <p><strong>Location:</strong> Ranchi, Jharkhand</p>
 
-            <p><strong>Phone:</strong> +91 9386064051</p>
+            <p><strong>Phone:</strong> +91 7488017902</p>
 
             <p><strong>Email:</strong> utkarshenterprises@gmail.com</p>
 
             <p><strong>Business:</strong> Courier & Logistics Services</p>
 
-            <p><strong>Working Hours:</strong> Monday - Saturday (9 AM - 7 PM)</p>
+            <p><strong>Working Hours:</strong> Monday - Saturday (9 AM - 9 PM)</p>
         </div>
     );
 }
