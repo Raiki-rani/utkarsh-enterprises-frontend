@@ -121,11 +121,11 @@ src/
 GitHub:
 https://github.com/Raiki-rani
 
-LinkedIn:
-(Add your LinkedIn URL)
+🔗 LinkedIn: 
+https://www.linkedin.com/in/raiki-rani-029423420
 
 Email:
-utkarshenterprises@gmail.com
+raikiranirajput@gmail.com
 
 ---
 
